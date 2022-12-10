@@ -13,11 +13,11 @@ public class CommentService {
         throw new UnsupportedOperationException();
     }
 
-    public Comment commentUpdate(Integer id, Comment comment) {
+    public Comment update(Integer id, Comment comment) {
         throw new UnsupportedOperationException();
     }
 
-    public void deleteComment(Integer id) {
+    public void delete(Integer id) {
         throw new UnsupportedOperationException();
     }
 }

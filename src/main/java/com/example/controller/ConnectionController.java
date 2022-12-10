@@ -14,22 +14,22 @@ public class ConnectionController {
 
     @GetMapping("/{id}")
     public Connection getConnectionById(@PathVariable Integer id){
-        return connectionService.getConnectionById(id);
+        return connectionService.findById(id);
     }
 
     @PostMapping
     public Connection connectionCreate(@RequestBody Connection connection){
-        return connectionService.createConnection(connection);
+        return connectionService.create(connection);
     }
 
     @PutMapping("/{id}")
     public Connection connectionUpdate(@PathVariable Integer id, @RequestBody Connection connection){
-        return connectionService.connectionUpdate(id, connection);
+        return connectionService.update(id, connection);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteConnection(@RequestBody Integer id){
-        connectionService.deleteConnection(id);
+    public void deleteConnection(@RequestBody Integer id) {
+        connectionService.delete(id);
     }
 
 }

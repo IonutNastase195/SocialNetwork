@@ -19,14 +19,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
-    @Column(name = "name")
+    @Column(name = "username")
     private String name;
+
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "active")
+    private Boolean active;
 
     @Lob
     @Column(name = "profile_picture")
@@ -34,5 +37,7 @@ public class User {
 
     @Column(name = "profile_picture_name")
     private String profilePictureName;
+
+
 
 }

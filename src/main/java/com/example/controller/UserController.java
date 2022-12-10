@@ -13,21 +13,21 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Integer id) {
-        return userService.getUserById(id);
+        return userService.findById(id);
     }
 
     @PostMapping
     public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+        return userService.create(user);
     }
 
     @PutMapping("/{id}")
     public User updateUser(@PathVariable Integer id, @RequestBody User user) {
-        return userService.updateUser(id, user);
+        return userService.update(id, user);
     }
 
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Integer id) {
-        userService.deleteUser(id);
+        userService.delete(id);
     }
 }

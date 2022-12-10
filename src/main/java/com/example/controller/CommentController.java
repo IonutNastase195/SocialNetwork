@@ -13,22 +13,22 @@ public class CommentController {
     private CommentService commentService;
 
     @GetMapping("/{id}")
-    public Comment getCommentById(@PathVariable Integer id){
+    public Comment getCommentById(@PathVariable Integer id) {
         return commentService.findById(id);
     }
 
     @PostMapping
-    public Comment commentCreate(@RequestBody Comment comment){
+    public Comment commentCreate(@RequestBody Comment comment) {
         return commentService.create(comment);
     }
 
     @PutMapping("/{id}")
-    public Comment commentUpdate(@PathVariable Integer id, @RequestBody Comment comment){
-        return commentService.commentUpdate(id,comment);
+    public Comment commentUpdate(@PathVariable Integer id, @RequestBody Comment comment) {
+        return commentService.update(id, comment);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteComment(@PathVariable Integer id){
-        commentService.deleteComment(id);
+    public void deleteComment(@PathVariable Integer id) {
+        commentService.delete(id);
     }
 }

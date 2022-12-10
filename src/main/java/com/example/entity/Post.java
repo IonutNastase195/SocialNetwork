@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = {"media"})
 @Table(name = "posts")
 public class Post {
 
@@ -25,6 +25,7 @@ public class Post {
     @Column(name = "text")
     private String text;
 
+    @Lob
     @Column(name = "media")
     private String media;
 

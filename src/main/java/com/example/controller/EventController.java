@@ -13,23 +13,23 @@ public class EventController {
     private EventService eventService;
 
     @GetMapping("/{id}")
-    public Event getEventById(@PathVariable Integer id){
-        return eventService.getServiceById(id);
+    public Event getEventById(@PathVariable Integer id) {
+        return eventService.findById(id);
     }
 
     @PostMapping
-    public Event eventCreate(@RequestBody Event event){
-        return eventService.createEvent(event);
+    public Event eventCreate(@RequestBody Event event) {
+        return eventService.create(event);
     }
 
     @PutMapping("/{id}")
-    public Event eventUpdate(@PathVariable Integer id, @RequestBody Event event){
-        return eventService.eventUpdate(id,event);
+    public Event eventUpdate(@PathVariable Integer id, @RequestBody Event event) {
+        return eventService.update(id, event);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEvent(@PathVariable Integer id){
-        eventService.deleteEvent(id);
+    public void deleteEvent(@PathVariable Integer id) {
+        eventService.delete(id);
     }
 
 }

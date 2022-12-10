@@ -4,19 +4,19 @@ import com.example.entity.Post;
 import com.example.entity.User;
 
 public class PostService {
-    public Post getPostById(Integer id) {
+    public Post findById(Integer id) {
         return null;
     }
 
-    public Post createPost(Post post) {
+    public Post create(Post post) {
         return post;
     }
 
-    public User updatePost(Integer id, Post post) {
+    public User update(Integer id, Post post) {
         return null;
     }
 
-    public void deletePost(Integer id) {
+    public void delete(Integer id) {
     }
 
 }

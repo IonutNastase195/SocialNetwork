@@ -14,21 +14,21 @@ public class PostController {
 
     @GetMapping("/{id}")
     public Post getPostById(@PathVariable Integer id){
-        return postService.getPostById(id);
+        return postService.findById(id);
     }
 
     @PostMapping
     public Post postCreate(@RequestBody Post post){
-        return postService.createPost(post);
+        return postService.create(post);
     }
 
     @PutMapping("/{id}")
     public User updatePost(@PathVariable Integer id, @RequestBody Post post) {
-        return postService.updatePost(id, post);
+        return postService.update(id, post);
     }
 
     @DeleteMapping("/{id}")
     public void deletePost(@PathVariable Integer id) {
-        postService.deletePost(id);
+        postService.delete(id);
     }
 }

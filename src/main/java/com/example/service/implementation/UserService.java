@@ -3,19 +3,19 @@ package com.example.service.implementation;
 import com.example.entity.User;
 
 public class UserService {
-    public User getUserById(Integer id) {
+    public User findById(Integer id) {
         return null;
     }
 
-    public User createUser(User user) {
+    public User create(User user) {
 
         return null;
     }
 
-    public User updateUser(Integer id, User user) {
+    public User update(Integer id, User user) {
         return user;
     }
 
-    public void deleteUser(Integer id) {
+    public void delete(Integer id) {
     }
 }
