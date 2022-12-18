@@ -1,8 +1,7 @@
 package com.example.entity;
 
-import javax.persistence.*;
-
 import lombok.*;
+import javax.persistence.*;
 
 
 @Entity
@@ -37,7 +36,6 @@ public class User {
 
     @Column(name = "profile_picture_name")
     private String profilePictureName;
-
 
 
 }

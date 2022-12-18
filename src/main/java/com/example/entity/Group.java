@@ -1,8 +1,8 @@
 package com.example.entity;
 
 import javax.persistence.*;
-import java.util.Set;
-
+import java.util.ArrayList;
+import java.util.List;
 import lombok.*;
 
 @Entity
@@ -12,13 +12,12 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Table(name = "groups")
-
+@Table(name = "t_groups")
 public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer groupId;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -32,10 +31,6 @@ public class Group {
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<User> members;
-
-    public Integer getGroupId() {
-        return groupId;
-    }
+    private final List<User> groupMembers = new ArrayList<>();
 
 }

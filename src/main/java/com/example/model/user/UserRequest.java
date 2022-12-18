@@ -1,20 +1,27 @@
 package com.example.model.user;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
-@Data
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserRequest {
-    private Integer id;
 
+    private Integer userId;
     @NotBlank(message = "Invalid name")
     private String name;
-
-    @NotBlank(message = "Invalid email")
-    private String email;
-
-    @NotBlank(message = "Invalid password")
+    @NotBlank
     private String password;
+    @NotBlank
+    private String email;
+    private Boolean active;
+
 
 }
+
+
+

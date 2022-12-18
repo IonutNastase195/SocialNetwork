@@ -2,33 +2,47 @@ package com.example.controller;
 
 import com.example.entity.Post;
 import com.example.entity.User;
-import com.example.service.implementation.PostService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.model.post.PostRequest;
+import com.example.model.post.PostResponse;
+import com.example.model.post.PostUpdateRequest;
+import com.example.service.PostService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/post")
 public class PostController {
-    @Autowired
-    private PostService postService;
 
-    @GetMapping("/{id}")
-    public Post getPostById(@PathVariable Integer id){
-        return postService.findById(id);
+    private final PostService postService;
+
+
+    @GetMapping("find/{postId}")
+    public PostResponse getPostById(@PathVariable Integer postId){
+        return postService.getPostById(postId);
     }
 
-    @PostMapping
-    public Post postCreate(@RequestBody Post post){
-        return postService.create(post);
+    @PostMapping ("/create")
+    public PostResponse createPost(@RequestBody PostRequest postRequest){
+        return postService.createPost(postRequest);
     }
 
-    @PutMapping("/{id}")
-    public User updatePost(@PathVariable Integer id, @RequestBody Post post) {
-        return postService.update(id, post);
+    @PatchMapping("update")
+    public void updatePostById(@RequestBody @Valid PostUpdateRequest postUpdateRequest){
+        postService.updatePostById(postUpdateRequest);
     }
 
-    @DeleteMapping("/{id}")
-    public void deletePost(@PathVariable Integer id) {
-        postService.delete(id);
+    @DeleteMapping("delete/{postId}")
+    public void deletePost(@PathVariable Integer postId) {
+        postService.deletePost(postId);
     }
+
+    @GetMapping("find-all-posts")
+    public List<PostResponse> getAllPosts(){
+        return postService.allPosts();
+    }
+
 }

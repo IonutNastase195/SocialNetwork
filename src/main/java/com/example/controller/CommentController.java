@@ -1,34 +1,35 @@
 package com.example.controller;
 
 import com.example.entity.Comment;
-import com.example.service.implementation.CommentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.service.CommentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/comment")
 public class CommentController {
 
-    @Autowired
-    private CommentService commentService;
+    private final CommentService commentService;
 
     @GetMapping("/{id}")
-    public Comment getCommentById(@PathVariable Integer id) {
+    public Optional<Comment> getCommentById(@PathVariable Integer id) {
         return commentService.findById(id);
     }
 
     @PostMapping
     public Comment commentCreate(@RequestBody Comment comment) {
-        return commentService.create(comment);
+        return commentService.addComment(comment);
     }
 
     @PutMapping("/{id}")
     public Comment commentUpdate(@PathVariable Integer id, @RequestBody Comment comment) {
-        return commentService.update(id, comment);
+        return commentService.updateComment(id, comment);
     }
 
     @DeleteMapping("/{id}")
     public void deleteComment(@PathVariable Integer id) {
-        commentService.delete(id);
+        commentService.deleteComment(id);
     }
 }

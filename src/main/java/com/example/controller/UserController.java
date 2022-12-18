@@ -1,33 +1,46 @@
 package com.example.controller;
 
-import com.example.entity.User;
-import com.example.service.implementation.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.model.user.UserRequest;
+import com.example.model.user.UserResponse;
+import com.example.model.user.UserUpdateRequest;
+import com.example.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
+import java.util.List;
+
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
-    @Autowired
-    private UserService userService;
 
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable Integer id) {
-        return userService.findById(id);
+    private final UserService userService;
+
+    @GetMapping("find/{userId}")
+    public UserResponse getUserById(@PathVariable Integer userId) {
+        return userService.getUserById(userId);
     }
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.create(user);
+    @PostMapping("/create")
+    public UserResponse createUser(@RequestBody UserRequest userRequest) {
+        return userService.createUser(userRequest);
     }
 
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable Integer id, @RequestBody User user) {
-        return userService.update(id, user);
+    @PatchMapping("update")
+    public void updateUserById(@RequestBody @Valid UserUpdateRequest userUpdateRequest) {
+        userService.updateUserById(userUpdateRequest);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Integer id) {
-        userService.delete(id);
+    @DeleteMapping("delete/{userId}")
+    public void deleteUser(@PathVariable Integer userId) {
+        userService.deleteUser(userId);
     }
+
+    @GetMapping("find-all")
+    public List<UserResponse> getAllUsers() {
+        return userService.allUsers();
+    }
+
+
 }

@@ -1,77 +1,77 @@
-#CREATE TABLE users (
-#   user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-#   username VARCHAR(255) NOT NULL,
-#   password VARCHAR(255) NOT NULL,
-#   email VARCHAR(255) NOT NULL,
-#   active BOOLEAN DEFAULT true,
-#   profile_picture LONGBLOB,
-#   profile_picture_name VARCHAR(255)
-#);
-#
-#CREATE TABLE posts (
-#   post_id INTEGER PRIMARY KEY AUTOINCREMENT,
-#   user_id INTEGER NOT NULL,
-#   text TEXT,
-#   media LONGBLOB,
-#   likes INTEGER,
-#   comments INTEGER,
-#   shares INTEGER,
-#   FOREIGN KEY (user_id) REFERENCES users(user_id)
-#);
-#
-#CREATE TABLE groups (
-#   group_id INTEGER PRIMARY KEY AUTOINCREMENT,
-#   name VARCHAR(255) NOT NULL,
-#   description TEXT
-#);
-#
-#CREATE TABLE group_members (
-#   group_id INTEGER NOT NULL,
-#   user_id INTEGER NOT NULL,
-#   FOREIGN KEY (group_id) REFERENCES groups(group_id),
-#   FOREIGN KEY (user_id) REFERENCES users(user_id)
-#);
-#
-#CREATE TABLE events (
-#   event_id INTEGER PRIMARY KEY,
-#   name VARCHAR(255),
-#   description VARCHAR(255),
-#   location VARCHAR(255),
-#   start_time DATE,
-#   end_time DATE,
-#   FOREIGN KEY (event_id) REFERENCES event_attendees(event_id)
-#);
-#
-#CREATE TABLE event_attendees (
-#   id INTEGER PRIMARY KEY AUTOINCREMENT,
-#   event_id INTEGER,
-#   user_id INTEGER,
-#   FOREIGN KEY (event_id) REFERENCES events(event_id),
-#   FOREIGN KEY (user_id) REFERENCES users(user_id)
-#);
-#
-#CREATE TABLE connections (
-#   connection_id INTEGER PRIMARY KEY AUTOINCREMENT,
-#   user_id INTEGER,
-#   connection_id INTEGER,
-#   type VARCHAR(255),
-#   date_established DATE,
-#   notes VARCHAR(255),
-#   FOREIGN KEY (user_id) REFERENCES users(user_id),
-#   FOREIGN KEY (connection_id) REFERENCES users(user_id)
-#);
-#
-#CREATE TABLE comments (
-#   comment_id INTEGER PRIMARY KEY AUTOINCREMENT,
-#   user_id INTEGER,
-#   post_id INTEGER,
-#   text VARCHAR(255),
-#   likes INTEGER,
-#   replies INTEGER,
-#   FOREIGN KEY (user_id) REFERENCES users(user_id),
-#   FOREIGN KEY (post_id) REFERENCES posts(post_id)
-#);
-#
+CREATE TABLE users (
+   user_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+   username VARCHAR(255) NOT NULL,
+   password VARCHAR(255) NOT NULL,
+   email VARCHAR(255) NOT NULL,
+   active BOOLEAN DEFAULT true,
+   profile_picture LONGBLOB,
+   profile_picture_name VARCHAR(255)
+);
+
+CREATE TABLE posts (
+   post_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+   user_id INTEGER NOT NULL,
+   text TEXT,
+   media LONGBLOB,
+   likes INTEGER,
+   comments INTEGER,
+   shares INTEGER,
+   FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE t_groups (
+   id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+   name VARCHAR(255) NOT NULL,
+   description TEXT
+);
+
+CREATE TABLE group_members (
+   group_id INTEGER NOT NULL,
+   user_id INTEGER NOT NULL,
+   FOREIGN KEY (group_id) REFERENCES t_groups(id),
+   FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE events (
+   event_id INTEGER PRIMARY KEY,
+   name VARCHAR(255),
+   description VARCHAR(255),
+   location VARCHAR(255),
+   start_time DATE,
+   end_time DATE,
+   FOREIGN KEY (event_id) REFERENCES event_attendees(event_id)
+);
+
+CREATE TABLE event_attendees (
+   id INTEGER PRIMARY KEY AUTO_INCREMENT,
+   event_id INTEGER,
+   user_id INTEGER,
+   FOREIGN KEY (event_id) REFERENCES events(event_id),
+   FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE t_connection (
+   id INTEGER PRIMARY KEY AUTO_INCREMENT,
+   user_id INTEGER,
+   connection_id INTEGER,
+   type VARCHAR(255),
+   date_established DATE,
+   notes VARCHAR(255),
+   FOREIGN KEY (user_id) REFERENCES users(user_id),
+   FOREIGN KEY (connection_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE comments (
+   id INTEGER PRIMARY KEY AUTO_INCREMENT,
+   user_id INTEGER,
+   post_id INTEGER,
+   text VARCHAR(255),
+   likes INTEGER,
+   replies INTEGER,
+   FOREIGN KEY (user_id) REFERENCES users(user_id),
+   FOREIGN KEY (post_id) REFERENCES posts(post_id)
+);
+
 --A user can make many posts, but each post is associated with only one user. This is a one-to-many relationship.
 --A group can have many members, and a user can be a member of many groups. This is a many-to-many relationship.
 --An event can have many attendees, and a user can attend many events. This is a many-to-many relationship.

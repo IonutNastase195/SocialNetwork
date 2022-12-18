@@ -1,7 +1,6 @@
 package com.example.entity;
 
 import javax.persistence.*;
-
 import lombok.*;
 
 @Entity
@@ -12,12 +11,11 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Table(name = "comments")
-
 public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer commentId;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

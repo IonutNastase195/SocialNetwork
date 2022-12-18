@@ -1,14 +1,18 @@
 package com.example.mapper;
 
-import com.example.entity.User;
+
 import com.example.model.user.UserRequest;
+import com.example.model.user.UserResponse;
+import com.example.entity.User;
 import org.mapstruct.Mapper;
-import org.springframework.context.annotation.ComponentScan;
+import java.util.List;
 
-@ComponentScan
-@Mapper(componentModel = "spring")
+
+@Mapper
 public interface UserMapper {
-
+    UserResponse map(User user);
     User map(UserRequest userRequest);
+
+    List<UserResponse> map(List<User> userList);
 
 }

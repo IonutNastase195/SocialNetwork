@@ -1,8 +1,8 @@
 package com.example.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
-
+import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 @Entity
@@ -12,13 +12,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Table(name = "connections")
+@Table(name = "t_connections")
 
 public class Connection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer connectionId;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -31,6 +31,7 @@ public class Connection {
     @Column(name = "type")
     private String type;
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "date_established")
     private Date dateEstablished;
 

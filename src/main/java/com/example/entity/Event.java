@@ -1,9 +1,9 @@
 package com.example.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Set;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 @Entity
@@ -30,9 +30,11 @@ public class Event {
     @Column(name = "location")
     private String location;
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "start_time")
     private Date startTime;
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "end_time")
     private Date endTime;
 
