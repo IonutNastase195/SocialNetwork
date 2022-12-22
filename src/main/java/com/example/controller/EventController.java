@@ -1,36 +1,47 @@
 package com.example.controller;
 
-import com.example.entity.Event;
+import com.example.mapper.EventMapper;
+import com.example.model.event.EventRequest;
+import com.example.model.event.EventResponse;
+import com.example.model.event.EventUpdate;
 import com.example.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import java.util.Optional;
 
+import java.util.List;
+
+
+
+@RequestMapping("/event")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/event")
 public class EventController {
 
     private final EventService eventService;
+    private final EventMapper eventMapper;
 
-    @GetMapping("/{id}")
-    public Optional<Event> getEventById(@PathVariable Integer id) {
+    @GetMapping("/events")
+    public List<EventResponse> getAllEvents() {
+        return eventService.getAllEvents();
+    }
+
+    @GetMapping("/events/{id}")
+    public EventResponse getEventById(@PathVariable Long id) {
         return eventService.getEventById(id);
     }
 
-    @PostMapping
-    public Event eventCreate(@RequestBody Event event) {
-        return eventService.addEvent(event);
+    @PostMapping("/events")
+    public EventResponse createEvent(@RequestBody EventRequest eventRequest) {
+        return eventService.createEvent(eventRequest);
     }
 
-    @PutMapping("/{id}")
-    public Event eventUpdate(@PathVariable Integer id, @RequestBody Event event) {
-        return eventService.updateEvent(event);
+    @PutMapping("/events/{id}")
+    public void updateEventById(@PathVariable Long id, @RequestBody EventUpdate eventUpdate) {
+        eventService.updateEventById(id, eventUpdate);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteEvent(@PathVariable Integer id) {
+    @DeleteMapping("/events/{id}")
+    public void deleteEvent(@PathVariable Long id) {
         eventService.deleteEvent(id);
     }
-
 }

@@ -1,7 +1,9 @@
 package com.example.entity;
 
 import lombok.*;
+
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -10,32 +12,40 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"profilePicture"})
-@Table(name = "users")
+@ToString
+@Table(name = "user")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Long id;
 
-    @Column(name = "username")
+    @Column(nullable = false)
     private String name;
 
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "email")
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "active")
-    private Boolean active;
+    @Column(nullable = false)
+    private String password;
 
-    @Lob
-    @Column(name = "profile_picture")
-    private byte[] profilePicture;
+    @OneToMany
+    private List<Connection> connections;
 
-    @Column(name = "profile_picture_name")
-    private String profilePictureName;
+    @ManyToMany
+    @JoinTable(name = "attendees",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private List<Event> events;
+
+    @OneToMany
+    private List<Friendship> friendships;
+
+    @OneToMany
+    private List<Group> groups;
+
+    @OneToMany
+    private List<Post> posts;
 
 
 }

@@ -2,16 +2,15 @@ package com.example.model.user;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 
 
 @Data
 public class UserResponse {
-
-    private Integer userId;
-    private String name;
-    private String password;
+    private Long id;
+    private String firstName;
+    private String lastName;
     private String email;
-    private Boolean active;
-
-
+    private LocalDateTime createdAt;
 }

@@ -1,38 +1,48 @@
 package com.example.controller;
 
 import com.example.entity.Friendship;
+import com.example.mapper.FriendshipMapper;
+import com.example.model.friendship.FriendshipRequest;
+import com.example.model.friendship.FriendshipResponse;
+import com.example.model.friendship.FriendshipUpdate;
 import com.example.service.FriendshipService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Optional;
 
-@RestController
+
 @RequestMapping("/friendships")
+@RestController
+@RequiredArgsConstructor
 public class FriendshipController {
 
     private final FriendshipService friendshipService;
+    private final FriendshipMapper friendshipMapper;
 
-    public FriendshipController(FriendshipService friendshipService) {
-        this.friendshipService = friendshipService;
+    @GetMapping("/friendships")
+    public List<FriendshipResponse> getAllFriendships() {
+        return friendshipService.getAllFriendships();
     }
 
-    @PostMapping
-    public Friendship createFriendship(@RequestBody Friendship friendship) {
-        return friendshipService.addFriendship(friendship);
+    @GetMapping("/friendships/{id}")
+    public FriendshipResponse getFriendshipById(@PathVariable Long id) {
+        return friendshipService.getFriendshipById(id);
     }
 
-    @DeleteMapping("/{friendshipId}")
-    public void deleteFriendship(@PathVariable Integer friendshipId) {
-        friendshipService.deleteFriendship(friendshipId);
+    @PostMapping("/friendships")
+    public FriendshipResponse createFriendship(@RequestBody FriendshipRequest friendshipRequest) {
+        return friendshipService.createFriendship(friendshipRequest);
     }
 
-    @GetMapping("/{friendshipId}")
-    public Optional<Friendship> getFriendshipById(@PathVariable Integer friendshipId) {
-        return friendshipService.getFriendshipById(friendshipId);
+    @PutMapping("/friendships/{id}")
+    public void updateFriendshipById(@PathVariable Long id, @RequestBody FriendshipUpdate friendshipUpdate) {
+        friendshipService.updateFriendshipById(id, friendshipUpdate);
     }
 
-    @PutMapping("/{friendshipId}")
-    public Friendship updateFriendship(@PathVariable Integer friendshipId, @RequestBody Friendship friendship) {
-        return friendshipService.updateFriendship(friendshipId, friendship);
+    @DeleteMapping("/friendships/{id}")
+    public void deleteFriendship(@PathVariable Long id) {
+        friendshipService.deleteFriendship(id);
     }
-
 }

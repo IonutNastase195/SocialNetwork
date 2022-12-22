@@ -1,7 +1,7 @@
 package com.example.entity;
 
-import lombok.*;
-import javax.persistence.*;
+        import lombok.*;
+        import javax.persistence.*;
 
 @Entity
 @Getter
@@ -12,17 +12,14 @@ import javax.persistence.*;
 @ToString
 @Table(name = "friendships")
 public class Friendship {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer friendshipId;
-
+    private Long id;
     @ManyToOne
-    @JoinColumn(name = "user_id_1")
+    @JoinColumn(name = "user1_id")
     private User user1;
-
     @ManyToOne
-    @JoinColumn(name = "user_id_2")
+    @JoinColumn(name = "user2_id")
     private User user2;
-
+    private String status;
 }

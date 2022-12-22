@@ -3,13 +3,12 @@ package com.example.model.post;
 import com.example.entity.User;
 import lombok.*;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class PostUpdateRequest {
-    private Integer postId;
-    private User user;
+    private Long id;
     private String text;
+    private String media;
+    private Integer likes;
+    private Integer comments;
+    private Integer shares;
 }

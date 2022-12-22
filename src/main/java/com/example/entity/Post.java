@@ -2,6 +2,8 @@ package com.example.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -9,31 +11,19 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"media"})
-@Table(name = "posts")
+@ToString
+@Table(name = "post")
 public class Post {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer postId;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @Column(name = "text")
+    private Long id;
     private String text;
-
-    @Lob
-    @Column(name = "media")
     private String media;
-
-    @Column(name = "likes")
     private Integer likes;
-
-    @Column(name = "comments")
     private Integer comments;
-
-    @Column(name = "shares")
     private Integer shares;
+    private LocalDateTime createdAt;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }

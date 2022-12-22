@@ -1,17 +1,15 @@
 package com.example.model.post;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
 
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class PostRequest {
-    private Integer postId;
-    @NotBlank
     private String text;
+    private String media;
+    private Integer likes;
+    private Integer comments;
+    private Integer shares;
 }

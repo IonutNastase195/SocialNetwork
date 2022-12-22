@@ -3,6 +3,8 @@ package com.example.entity;
 import javax.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -15,23 +17,15 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+    private Long id;
+    private String text;
+    private LocalDateTime createdAt;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @Column(name = "text")
-    private String text;
-
-    @Column(name = "likes")
-    private Integer likes;
-
-    @Column(name = "replies")
-    private Integer replies;
-
 }
+

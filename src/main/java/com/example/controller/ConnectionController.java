@@ -1,36 +1,48 @@
 package com.example.controller;
 
 import com.example.entity.Connection;
+import com.example.mapper.ConnectionMapper;
+import com.example.model.connection.ConnectionRequest;
+import com.example.model.connection.ConnectionResponse;
+import com.example.model.connection.ConnectionUpdate;
 import com.example.service.ConnectionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Optional;
 
+
+@RequestMapping("/connection")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/connection")
 public class ConnectionController {
 
     private final ConnectionService connectionService;
+    private final ConnectionMapper connectionMapper;
 
-    @GetMapping("/{id}")
-    public Optional<Connection> getConnectionById(@PathVariable Integer id){
+    @GetMapping("/connections")
+    public List<ConnectionResponse> getAllConnections() {
+        return connectionService.getAllConnections();
+    }
+
+    @GetMapping("/connections/{id}")
+    public ConnectionResponse getConnectionById(@PathVariable Long id) {
         return connectionService.getConnectionById(id);
     }
 
-    @PostMapping
-    public Connection connectionCreate(@RequestBody Connection connection){
-        return connectionService.addConnection(connection);
+    @PostMapping("/connections")
+    public ConnectionResponse createConnection(@RequestBody ConnectionRequest connectionRequest) {
+        return connectionService.createConnection(connectionRequest);
     }
 
-    @PutMapping("/{id}")
-    public Connection connectionUpdate(@PathVariable Integer id, @RequestBody Connection connection){
-        return connectionService.updateConnection(id, connection);
+    @PutMapping("/connections/{id}")
+    public void updateConnectionById(@PathVariable Long id, @RequestBody ConnectionUpdate connectionUpdate) {
+        connectionService.updateConnectionById(id, connectionUpdate);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteConnection(@RequestBody Integer id) {
+    @DeleteMapping("/connections/{id}")
+    public void deleteConnection(@PathVariable Long id) {
         connectionService.deleteConnection(id);
     }
-
 }

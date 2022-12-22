@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.entity.Post;
 import com.example.entity.User;
+import com.example.mapper.PostMapper;
 import com.example.model.post.PostRequest;
 import com.example.model.post.PostResponse;
 import com.example.model.post.PostUpdateRequest;
@@ -14,35 +15,33 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/post")
 public class PostController {
 
     private final PostService postService;
+    private final PostMapper postMapper;
 
-
-    @GetMapping("find/{postId}")
-    public PostResponse getPostById(@PathVariable Integer postId){
-        return postService.getPostById(postId);
+    @GetMapping("/posts")
+    public List<PostResponse> getAllPosts() {
+        return postService.getAllPosts();
     }
 
-    @PostMapping ("/create")
-    public PostResponse createPost(@RequestBody PostRequest postRequest){
-        return postService.createPost(postRequest);
+    @GetMapping("/posts/{id}")
+    public PostResponse getPostById(@PathVariable Integer id) {
+        return postService.getPostById(Long.valueOf(id));
     }
 
-    @PatchMapping("update")
-    public void updatePostById(@RequestBody @Valid PostUpdateRequest postUpdateRequest){
+    @PostMapping("/users/{userId}/posts")
+    public PostResponse createPost(@PathVariable Integer userId, @RequestBody PostRequest postRequest) {
+        return postService.createPost(Long.valueOf(userId), postRequest);
+    }
+
+    @PutMapping("/posts/{id}")
+    public void updatePostById(@PathVariable Integer id, @RequestBody PostUpdateRequest postUpdateRequest) {
         postService.updatePostById(postUpdateRequest);
     }
 
-    @DeleteMapping("delete/{postId}")
-    public void deletePost(@PathVariable Integer postId) {
-        postService.deletePost(postId);
+    @DeleteMapping("/posts/{id}")
+    public void deletePost(@PathVariable Integer id) {
+        postService.deletePost(Long.valueOf(id));
     }
-
-    @GetMapping("find-all-posts")
-    public List<PostResponse> getAllPosts(){
-        return postService.allPosts();
-    }
-
 }

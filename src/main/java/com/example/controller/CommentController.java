@@ -1,35 +1,47 @@
 package com.example.controller;
 
 import com.example.entity.Comment;
+import com.example.mapper.CommentMapper;
+import com.example.model.comment.CommentRequest;
+import com.example.model.comment.CommentResponse;
+import com.example.model.comment.CommentUpdate;
 import com.example.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Optional;
 
+
+@RequestMapping("/comment")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/comment")
 public class CommentController {
 
     private final CommentService commentService;
 
-    @GetMapping("/{id}")
-    public Optional<Comment> getCommentById(@PathVariable Integer id) {
-        return commentService.findById(id);
+    @GetMapping("/comments")
+    public List<CommentResponse> getAllComments() {
+        return commentService.getAllComments();
     }
 
-    @PostMapping
-    public Comment commentCreate(@RequestBody Comment comment) {
-        return commentService.addComment(comment);
+    @GetMapping("/comments/{id}")
+    public CommentResponse getCommentById(@PathVariable Long id) {
+        return commentService.getCommentById(id);
     }
 
-    @PutMapping("/{id}")
-    public Comment commentUpdate(@PathVariable Integer id, @RequestBody Comment comment) {
-        return commentService.updateComment(id, comment);
+    @PostMapping("/comments")
+    public CommentResponse createComment(@RequestBody CommentRequest commentRequest) {
+        return commentService.createComment(commentRequest);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteComment(@PathVariable Integer id) {
+    @PutMapping("/comments/{id}")
+    public void updateCommentById(@PathVariable Long id, @RequestBody CommentUpdate commentUpdate) {
+        commentService.updateCommentById(id, commentUpdate);
+    }
+
+    @DeleteMapping("/comments/{id}")
+    public void deleteComment(@PathVariable Long id) {
         commentService.deleteComment(id);
     }
 }

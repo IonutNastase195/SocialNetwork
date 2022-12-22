@@ -1,8 +1,11 @@
 package com.example.entity;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
@@ -14,36 +17,13 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Table(name = "events")
-
 public class Event {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer eventId;
-
-    @Column(name = "name")
+    private Long id;
     private String name;
-
-    @Column(name = "description")
-    private String description;
-
-    @Column(name = "location")
     private String location;
-
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    @Column(name = "start_time")
-    private Date startTime;
-
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    @Column(name = "end_time")
-    private Date endTime;
-
-    @ManyToMany
-    @JoinTable(
-            name = "event_attendees",
-            joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private Set<User> attendees;
-
+    private LocalDateTime date;
+    @ManyToMany(mappedBy = "events")
+    private List<User> attendees;
 }

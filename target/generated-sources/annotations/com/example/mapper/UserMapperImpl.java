@@ -10,55 +10,49 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-18T20:07:52+0200",
+    date = "2022-12-22T21:08:02+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
 
     @Override
-    public UserResponse map(User user) {
-        if ( user == null ) {
-            return null;
-        }
-
-        UserResponse userResponse = new UserResponse();
-
-        userResponse.setUserId( user.getUserId() );
-        userResponse.setName( user.getName() );
-        userResponse.setPassword( user.getPassword() );
-        userResponse.setEmail( user.getEmail() );
-        userResponse.setActive( user.getActive() );
-
-        return userResponse;
-    }
-
-    @Override
-    public User map(UserRequest userRequest) {
+    public User toEntity(UserRequest userRequest) {
         if ( userRequest == null ) {
             return null;
         }
 
         User.UserBuilder user = User.builder();
 
-        user.userId( userRequest.getUserId() );
-        user.name( userRequest.getName() );
-        user.password( userRequest.getPassword() );
         user.email( userRequest.getEmail() );
-        user.active( userRequest.getActive() );
+        user.password( userRequest.getPassword() );
 
         return user.build();
     }
 
     @Override
-    public List<UserResponse> map(List<User> userList) {
-        if ( userList == null ) {
+    public UserResponse toResponse(User user) {
+        if ( user == null ) {
             return null;
         }
 
-        List<UserResponse> list = new ArrayList<UserResponse>( userList.size() );
-        for ( User user : userList ) {
-            list.add( map( user ) );
+        UserResponse userResponse = new UserResponse();
+
+        userResponse.setId( user.getId() );
+        userResponse.setEmail( user.getEmail() );
+
+        return userResponse;
+    }
+
+    @Override
+    public List<UserResponse> toResponse(List<User> users) {
+        if ( users == null ) {
+            return null;
+        }
+
+        List<UserResponse> list = new ArrayList<UserResponse>( users.size() );
+        for ( User user : users ) {
+            list.add( toResponse( user ) );
         }
 
         return list;

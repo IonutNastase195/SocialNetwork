@@ -1,7 +1,6 @@
 package com.example.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.*;
 
@@ -14,23 +13,15 @@ import lombok.*;
 @ToString
 @Table(name = "t_groups")
 public class Group {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(name = "name")
+    private Long id;
     private String name;
-
-    @Column(name = "description")
-    private String description;
-
     @ManyToMany
     @JoinTable(
             name = "group_members",
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private final List<User> groupMembers = new ArrayList<>();
-
+    private List<User> members;
 }

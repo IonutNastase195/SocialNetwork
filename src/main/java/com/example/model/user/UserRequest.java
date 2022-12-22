@@ -4,23 +4,12 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class UserRequest {
-
-    private Integer userId;
-    @NotBlank(message = "Invalid name")
-    private String name;
-    @NotBlank
-    private String password;
-    @NotBlank
+    private String firstName;
+    private String lastName;
     private String email;
-    private Boolean active;
-
-
+    private String password;
 }
 
 

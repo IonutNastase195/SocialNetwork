@@ -1,37 +1,67 @@
 package com.example.service;
 
+import com.example.entity.Connection;
 import com.example.entity.Group;
+import com.example.entity.User;
+import com.example.exception.BusinessException;
+import com.example.mapper.GroupMapper;
+import com.example.model.group.GroupRequest;
+import com.example.model.group.GroupResponse;
+import com.example.model.group.GroupUpdate;
 import com.example.repository.GroupRepository;
+import com.example.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
-import java.util.Optional;
 
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class GroupService {
+
     private final GroupRepository groupRepository;
+    private final GroupMapper groupMapper;
+    private final UserRepository userRepository;
 
-    public List<Group> getAllGroups() {
-        return groupRepository.findAll();
+    public List<GroupResponse> getAllGroups() {
+        return groupMapper.toResponse(groupRepository.findAll());
     }
 
-    public Optional<Group> getGroupById(Integer id) {
-        return groupRepository.findById(id);
+    public GroupResponse getGroupById(Long id) {
+        Group group = groupRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Group not found!")
+        );
+        return groupMapper.toResponse(group);
     }
 
-    public Group addGroup(Group group) {
-        return groupRepository.save(group);
+    public GroupResponse createGroup(GroupRequest groupRequest) {
+        Group group = groupMapper.toEntity(groupRequest);
+        group.setMembers(getUsersByIds(groupRequest.getMembers()));
+        Group groupSaved = groupRepository.save(group);
+        return groupMapper.toResponse(groupSaved);
     }
 
-    public Group updateGroup(Integer id, Group group) {
-        return groupRepository.save(group);
+    public void updateGroupById(Long id, GroupUpdate groupUpdate) {
+        Group groupToUpdate = groupRepository.findById(id).orElseThrow(
+                () -> new BusinessException("The group with the inserted id does not exist!")
+        );
+        groupToUpdate.setName(groupUpdate.getName());
+        groupToUpdate.setMembers(getUsersByIds(groupUpdate.getMembers()));
     }
 
-    public void delete(Integer id) {
-        groupRepository.deleteById(id);
+    public void deleteGroup(Long id) {
+        Group groupToDelete = groupRepository.findById(id).orElseThrow(() ->
+                new BusinessException("The group that you want to delete does not exist!"));
+        groupRepository.deleteById(groupToDelete.getId());
+    }
+
+    private List<User> getUsersByIds(List<Long> userIds) {
+        return userIds.stream().map(userId ->
+                userRepository.findById(userId).orElseThrow(() ->
+                        new BusinessException("User not found!"))
+        ).collect(Collectors.toList());
     }
 }

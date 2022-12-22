@@ -1,37 +1,45 @@
 package com.example.controller;
 
-import com.example.entity.Group;
+import com.example.mapper.GroupMapper;
+import com.example.model.group.GroupRequest;
+import com.example.model.group.GroupResponse;
+import com.example.model.group.GroupUpdate;
 import com.example.service.GroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import java.util.Optional;
+import java.util.List;
 
+
+
+@RequestMapping("/groups")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/group")
 public class GroupController {
 
     private final GroupService groupService;
 
-    @GetMapping("/{id}")
-    public Optional<Group> getGroupById(@PathVariable Integer id) {
+    @GetMapping("/groups")
+    public List<GroupResponse> getAllGroups() {
+        return groupService.getAllGroups();
+    }
+
+    @GetMapping("/groups/{id}")
+    public GroupResponse getGroupById(@PathVariable Long id) {
         return groupService.getGroupById(id);
     }
 
-    @PostMapping
-    public Group groupCreate(@RequestBody Group group) {
-        return groupService.addGroup(group);
+    @PostMapping("/groups")
+    public GroupResponse createGroup(@RequestBody GroupRequest groupRequest) {
+        return groupService.createGroup(groupRequest);
     }
 
-    @PutMapping("/{id}")
-    public Group groupUpdate(@PathVariable Integer id, @RequestBody Group group) {
-        return groupService.updateGroup(id, group);
+    @PutMapping("/groups/{id}")
+    public void updateGroupById(@PathVariable Long id, @RequestBody GroupUpdate groupUpdate) {
+        groupService.updateGroupById(id, groupUpdate);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteGroup(@PathVariable Integer id) {
-        groupService.delete(id);
+    @DeleteMapping("/groups/{id}")
+    public void deleteGroup(@PathVariable Long id) {
+        groupService.deleteGroup(id);
     }
-
-
 }

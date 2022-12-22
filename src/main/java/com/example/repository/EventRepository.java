@@ -2,8 +2,8 @@ package com.example.repository;
 
 import com.example.entity.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.List;
 
-public interface EventRepository extends JpaRepository<Event, Integer> {
-        List<Event> findByDescription(String description);
+
+
+public interface EventRepository extends JpaRepository<Event, Long> {
 }
