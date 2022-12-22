@@ -3,10 +3,12 @@ com\example\repository\EventRepository.class
 com\example\Application.class
 com\example\exception\CustomExceptionHandler.class
 com\example\model\event\EventRequest.class
+com\example\model\user\UserRequest$UserRequestBuilder.class
 com\example\entity\Post.class
 com\example\service\EventService.class
 com\example\mapper\UserMapperImpl.class
 com\example\model\user\UserRequest.class
+com\example\model\user\UserUpdate$UserUpdateBuilder.class
 com\example\entity\Connection.class
 com\example\repository\FriendshipRepository.class
 com\example\model\group\GroupResponse.class
@@ -25,6 +27,7 @@ com\example\entity\User$UserBuilder.class
 com\example\mapper\CommentMapperImpl.class
 com\example\repository\PostRepository.class
 com\example\mapper\EventMapperImpl.class
+com\example\model\user\UserResponse$UserResponseBuilder.class
 com\example\controller\ConnectionController.class
 com\example\repository\CommentRepository.class
 com\example\model\friendship\FriendshipRequest.class

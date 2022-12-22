@@ -27,7 +27,7 @@ public class ConnectionController {
     }
 
     @GetMapping("/connections/{id}")
-    public ConnectionResponse getConnectionById(@PathVariable Long id) {
+    public ConnectionResponse getConnectionById(@PathVariable Integer id) {
         return connectionService.getConnectionById(id);
     }
 
@@ -37,12 +37,12 @@ public class ConnectionController {
     }
 
     @PutMapping("/connections/{id}")
-    public void updateConnectionById(@PathVariable Long id, @RequestBody ConnectionUpdate connectionUpdate) {
+    public void updateConnectionById(@PathVariable Integer id, @RequestBody ConnectionUpdate connectionUpdate) {
         connectionService.updateConnectionById(id, connectionUpdate);
     }
 
     @DeleteMapping("/connections/{id}")
-    public void deleteConnection(@PathVariable Long id) {
+    public void deleteConnection(@PathVariable Integer id) {
         connectionService.deleteConnection(id);
     }
 }

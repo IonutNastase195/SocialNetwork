@@ -30,14 +30,14 @@ public class PostService {
         return postMapper.map(postRepository.findAll());
     }
 
-    public PostResponse getPostById(Long id) {
+    public PostResponse getPostById(Integer id) {
         Post post = postRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Post not found!")
         );
         return postMapper.map(post);
     }
 
-    public PostResponse createPost(Long userId, PostRequest postRequest) {
+    public PostResponse createPost(Integer userId, PostRequest postRequest) {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new BusinessException("User not found!")
         );
@@ -60,7 +60,7 @@ public class PostService {
         postToUpdate.setShares(postUpdateRequest.getShares());
     }
 
-    public void deletePost(Long id) {
+    public void deletePost(Integer id) {
         Post postToDelete = postRepository.findById(id).orElseThrow(() ->
                 new BusinessException("The post that you want to delete does not exist!"));
         postRepository.deleteById(postToDelete.getId());

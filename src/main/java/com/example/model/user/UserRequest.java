@@ -2,12 +2,17 @@ package com.example.model.user;
 
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class UserRequest {
-    private String firstName;
-    private String lastName;
+    private Integer id;
+    private String name;
     private String email;
     private String password;
 }

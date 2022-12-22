@@ -27,7 +27,7 @@ public class FriendshipController {
     }
 
     @GetMapping("/friendships/{id}")
-    public FriendshipResponse getFriendshipById(@PathVariable Long id) {
+    public FriendshipResponse getFriendshipById(@PathVariable Integer id) {
         return friendshipService.getFriendshipById(id);
     }
 
@@ -37,12 +37,12 @@ public class FriendshipController {
     }
 
     @PutMapping("/friendships/{id}")
-    public void updateFriendshipById(@PathVariable Long id, @RequestBody FriendshipUpdate friendshipUpdate) {
+    public void updateFriendshipById(@PathVariable Integer id, @RequestBody FriendshipUpdate friendshipUpdate) {
         friendshipService.updateFriendshipById(id, friendshipUpdate);
     }
 
     @DeleteMapping("/friendships/{id}")
-    public void deleteFriendship(@PathVariable Long id) {
+    public void deleteFriendship(@PathVariable Integer id) {
         friendshipService.deleteFriendship(id);
     }
 }

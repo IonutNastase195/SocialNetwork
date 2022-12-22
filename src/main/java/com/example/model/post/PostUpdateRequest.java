@@ -5,7 +5,7 @@ import lombok.*;
 
 @Data
 public class PostUpdateRequest {
-    private Long id;
+    private Integer id;
     private String text;
     private String media;
     private Integer likes;

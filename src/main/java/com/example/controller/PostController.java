@@ -27,12 +27,12 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public PostResponse getPostById(@PathVariable Integer id) {
-        return postService.getPostById(Long.valueOf(id));
+        return postService.getPostById(id);
     }
 
     @PostMapping("/users/{userId}/posts")
     public PostResponse createPost(@PathVariable Integer userId, @RequestBody PostRequest postRequest) {
-        return postService.createPost(Long.valueOf(userId), postRequest);
+        return postService.createPost(userId, postRequest);
     }
 
     @PutMapping("/posts/{id}")
@@ -42,6 +42,6 @@ public class PostController {
 
     @DeleteMapping("/posts/{id}")
     public void deletePost(@PathVariable Integer id) {
-        postService.deletePost(Long.valueOf(id));
+        postService.deletePost(id);
     }
 }

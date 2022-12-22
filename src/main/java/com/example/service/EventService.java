@@ -30,7 +30,7 @@ public class EventService {
         return eventMapper.toResponse(eventRepository.findAll());
     }
 
-    public EventResponse getEventById(Long id) {
+    public EventResponse getEventById(Integer id) {
         Event event = eventRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Event not found!")
         );
@@ -44,7 +44,7 @@ public class EventService {
         return eventMapper.toResponse(eventSaved);
     }
 
-    public void updateEventById(Long id, EventUpdate eventUpdate) {
+    public void updateEventById(Integer id, EventUpdate eventUpdate) {
         Event eventToUpdate = eventRepository.findById(id).orElseThrow(
                 () -> new BusinessException("The event with the inserted id does not exist!")
         );
@@ -54,13 +54,13 @@ public class EventService {
         eventToUpdate.setAttendees(getUsersByIds(eventUpdate.getAttendees()));
     }
 
-    public void deleteEvent(Long id) {
+    public void deleteEvent(Integer id) {
         Event eventToDelete = eventRepository.findById(id).orElseThrow(() ->
                 new BusinessException("The event that you want to delete does not exist!"));
         eventRepository.deleteById(eventToDelete.getId());
     }
 
-    private List<User> getUsersByIds(List<Long> userIds) {
+    private List<User> getUsersByIds(List<Integer> userIds) {
         return userIds.stream().map(userId ->
                 userRepository.findById(userId).orElseThrow(() ->
                         new BusinessException("User not found!"))

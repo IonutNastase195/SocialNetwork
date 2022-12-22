@@ -30,7 +30,7 @@ public class GroupService {
         return groupMapper.toResponse(groupRepository.findAll());
     }
 
-    public GroupResponse getGroupById(Long id) {
+    public GroupResponse getGroupById(Integer id) {
         Group group = groupRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Group not found!")
         );
@@ -44,7 +44,7 @@ public class GroupService {
         return groupMapper.toResponse(groupSaved);
     }
 
-    public void updateGroupById(Long id, GroupUpdate groupUpdate) {
+    public void updateGroupById(Integer id, GroupUpdate groupUpdate) {
         Group groupToUpdate = groupRepository.findById(id).orElseThrow(
                 () -> new BusinessException("The group with the inserted id does not exist!")
         );
@@ -52,13 +52,13 @@ public class GroupService {
         groupToUpdate.setMembers(getUsersByIds(groupUpdate.getMembers()));
     }
 
-    public void deleteGroup(Long id) {
+    public void deleteGroup(Integer id) {
         Group groupToDelete = groupRepository.findById(id).orElseThrow(() ->
                 new BusinessException("The group that you want to delete does not exist!"));
         groupRepository.deleteById(groupToDelete.getId());
     }
 
-    private List<User> getUsersByIds(List<Long> userIds) {
+    private List<User> getUsersByIds(List<Integer> userIds) {
         return userIds.stream().map(userId ->
                 userRepository.findById(userId).orElseThrow(() ->
                         new BusinessException("User not found!"))

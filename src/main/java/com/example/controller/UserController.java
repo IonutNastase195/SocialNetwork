@@ -7,40 +7,39 @@ import com.example.model.user.UserUpdate;
 import com.example.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
-
-@RequestMapping("/users")
+@RequestMapping("users")
 @RestController
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-    private final UserMapper userMapper;
 
-    @GetMapping("/users")
+    @GetMapping("findAll")
     public List<UserResponse> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/users/{id}")
-    public UserResponse getUserById(@PathVariable Long id) {
+    @GetMapping("/find/{id}")
+    public UserResponse getUserById(@PathVariable Integer id) {
         return userService.getUserById(id);
     }
 
-    @PostMapping("/users")
+    @PostMapping("create")
     public UserResponse createUser(@RequestBody UserRequest userRequest) {
         return userService.createUser(userRequest);
     }
 
-    @PutMapping("/users/{id}")
-    public void updateUserById(@PathVariable Long id, @RequestBody UserUpdate userUpdate) {
+    @PutMapping("update/{id}")
+    public void updateUserById(@PathVariable Integer id, @RequestBody UserUpdate userUpdate) {
         userService.updateUserById(id, userUpdate);
     }
 
-    @DeleteMapping("/users/{id}")
-    public void deleteUser(@PathVariable Long id) {
+    @DeleteMapping("delete/{id}")
+    public void deleteUser(@PathVariable Integer id) {
         userService.deleteUser(id);
     }
 }

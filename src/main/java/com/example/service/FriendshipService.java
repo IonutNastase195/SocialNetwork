@@ -29,7 +29,7 @@ public class FriendshipService {
         return friendshipMapper.toResponse(friendshipRepository.findAll());
     }
 
-    public FriendshipResponse getFriendshipById(Long id) {
+    public FriendshipResponse getFriendshipById(Integer id) {
         Friendship friendship = friendshipRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Friendship not found!")
         );
@@ -50,14 +50,14 @@ public class FriendshipService {
         return friendshipMapper.toResponse(friendshipSaved);
     }
 
-    public void updateFriendshipById(Long id, FriendshipUpdate friendshipUpdate) {
+    public void updateFriendshipById(Integer id, FriendshipUpdate friendshipUpdate) {
         Friendship friendshipToUpdate = friendshipRepository.findById(id).orElseThrow(
                 () -> new BusinessException("The friendship with the inserted id does not exist!")
         );
         friendshipToUpdate.setStatus(friendshipUpdate.getStatus());
     }
 
-    public void deleteFriendship(Long id) {
+    public void deleteFriendship(Integer id) {
         Friendship friendshipToDelete = friendshipRepository.findById(id).orElseThrow(() ->
                 new BusinessException("The friendship that you want to delete does not exist!"));
         friendshipRepository.deleteById(friendshipToDelete.getId());

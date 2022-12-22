@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 public class EventResponse {
-    private Long id;
+    private Integer id;
     private String name;
     private String location;
     private LocalDateTime date;

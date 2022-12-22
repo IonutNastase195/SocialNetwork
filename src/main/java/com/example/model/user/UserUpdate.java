@@ -4,6 +4,9 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class UserUpdate {
     private String name;

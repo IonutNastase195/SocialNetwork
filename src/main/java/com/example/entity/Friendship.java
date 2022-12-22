@@ -14,7 +14,7 @@ package com.example.entity;
 public class Friendship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @ManyToOne
     @JoinColumn(name = "user1_id")
     private User user1;

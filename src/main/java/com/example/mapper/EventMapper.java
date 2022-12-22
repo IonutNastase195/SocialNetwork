@@ -12,11 +12,11 @@ import java.util.List;
 @Mapper
 public interface EventMapper {
 
-    User map(Long value);
+    User map(Integer value);
     Event toEntity(EventRequest eventRequest);
     EventResponse toResponse(Event event);
     List<EventResponse> toResponse(List<Event> events);
 
-    List<User> map(List<Long> value);
+    List<User> map(List<Integer> value);
 
 }

@@ -5,7 +5,7 @@ import lombok.*;
 
 @Data
 public class FriendshipResponse {
-    private Long id;
+    private Integer id;
     private UserResponse user1;
     private UserResponse user2;
     private String status;

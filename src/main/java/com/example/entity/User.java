@@ -3,6 +3,7 @@ package com.example.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 
@@ -17,15 +18,17 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Column(nullable = false)
+    @Column
+    @NotBlank
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
+    @NotBlank
     private String email;
 
-    @Column(nullable = false)
+    @Column
     private String password;
 
     @OneToMany

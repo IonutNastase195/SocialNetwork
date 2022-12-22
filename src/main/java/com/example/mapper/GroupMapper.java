@@ -14,6 +14,6 @@ public interface GroupMapper {
     Group toEntity(GroupRequest groupRequest);
     GroupResponse toResponse(Group group);
     List<GroupResponse> toResponse(List<Group> groups);
-    User map(Long value);
-    List<User> map(List<Long> value);
+    User map(Integer value);
+    List<User> map(List<Integer> value);
 }

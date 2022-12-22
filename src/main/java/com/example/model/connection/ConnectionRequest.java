@@ -9,8 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class ConnectionRequest {
-    private Long user1Id;
-    private Long user2Id;
+    private Integer user1Id;
+    private Integer user2Id;
     private String status;
 
 }

@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class CommentRequest {
-    private Long userId;
-    private Long postId;
+    private Integer userId;
+    private Integer postId;
     private String content;
 }

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class PostResponse {
-    private Long id;
+    private Integer id;
     private String text;
     private String media;
     private Integer likes;

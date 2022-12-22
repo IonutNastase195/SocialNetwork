@@ -10,6 +10,6 @@ public class EventRequest {
     private String name;
     private String location;
     private LocalDateTime date;
-    private List<Long> attendees;
+    private List<Integer> attendees;
 }
 

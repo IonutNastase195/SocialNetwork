@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
-import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -30,7 +30,7 @@ public class CommentService {
         return commentMapper.toResponse(commentRepository.findAll());
     }
 
-    public CommentResponse getCommentById(Long id) {
+    public CommentResponse getCommentById(Integer id) {
         Comment comment = commentRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Comment not found!")
         );
@@ -51,14 +51,14 @@ public class CommentService {
         return commentMapper.toResponse(commentSaved);
     }
 
-    public void updateCommentById(Long id, CommentUpdate commentUpdate) {
+    public void updateCommentById(Integer id, CommentUpdate commentUpdate) {
         Comment commentToUpdate = commentRepository.findById(id).orElseThrow(
                 () -> new BusinessException("The comment with the inserted id does not exist!")
         );
         commentToUpdate.setText(commentUpdate.getContent());
     }
 
-    public void deleteComment(Long id) {
+    public void deleteComment(Integer id) {
         Comment commentToDelete = commentRepository.findById(id).orElseThrow(() ->
                 new BusinessException("The comment that you want to delete does not exist!"));
         commentRepository.deleteById(commentToDelete.getId());

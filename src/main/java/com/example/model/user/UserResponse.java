@@ -6,11 +6,12 @@ import java.time.LocalDateTime;
 
 
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class UserResponse {
-    private Long id;
-    private String firstName;
-    private String lastName;
+    private String name;
     private String email;
-    private LocalDateTime createdAt;
+    private String password;
 }

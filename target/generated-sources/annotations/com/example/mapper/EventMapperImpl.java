@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-22T21:08:02+0200",
+    date = "2022-12-22T22:29:21+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
 public class EventMapperImpl implements EventMapper {
 
     @Override
-    public User map(Long value) {
+    public User map(Integer value) {
         if ( value == null ) {
             return null;
         }
@@ -77,14 +77,14 @@ public class EventMapperImpl implements EventMapper {
     }
 
     @Override
-    public List<User> map(List<Long> value) {
+    public List<User> map(List<Integer> value) {
         if ( value == null ) {
             return null;
         }
 
         List<User> list = new ArrayList<User>( value.size() );
-        for ( Long long1 : value ) {
-            list.add( map( long1 ) );
+        for ( Integer integer : value ) {
+            list.add( map( integer ) );
         }
 
         return list;
@@ -95,12 +95,13 @@ public class EventMapperImpl implements EventMapper {
             return null;
         }
 
-        UserResponse userResponse = new UserResponse();
+        UserResponse.UserResponseBuilder userResponse = UserResponse.builder();
 
-        userResponse.setId( user.getId() );
-        userResponse.setEmail( user.getEmail() );
+        userResponse.name( user.getName() );
+        userResponse.email( user.getEmail() );
+        userResponse.password( user.getPassword() );
 
-        return userResponse;
+        return userResponse.build();
     }
 
     protected List<UserResponse> userListToUserResponseList(List<User> list) {

@@ -9,9 +9,9 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class ConnectionResponse {
-    private Long id;
-    private Long user1Id;
-    private Long user2Id;
+    private Integer id;
+    private Integer user1Id;
+    private Integer user2Id;
     private String status;
 
 }

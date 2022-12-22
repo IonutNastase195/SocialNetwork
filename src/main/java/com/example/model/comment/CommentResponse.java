@@ -9,9 +9,9 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class CommentResponse {
-    private Long id;
-    private Long userId;
-    private Long postId;
+    private Integer id;
+    private Integer userId;
+    private Integer postId;
     private String content;
 
 }

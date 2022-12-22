@@ -6,5 +6,5 @@ import java.util.List;
 @Data
 public class GroupUpdate {
     private String name;
-    private List<Long> members;
+    private List<Integer> members;
 }

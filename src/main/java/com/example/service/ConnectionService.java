@@ -29,7 +29,7 @@ public class ConnectionService {
         return connectionMapper.toResponse(connectionRepository.findAll());
     }
 
-    public ConnectionResponse getConnectionById(Long id) {
+    public ConnectionResponse getConnectionById(Integer id) {
         Connection connection = connectionRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Connection not found!")
         );
@@ -51,14 +51,14 @@ public class ConnectionService {
         return connectionMapper.toResponse(connectionSaved);
     }
 
-    public void updateConnectionById(Long id, ConnectionUpdate connectionUpdate) {
+    public void updateConnectionById(Integer id, ConnectionUpdate connectionUpdate) {
         Connection connectionToUpdate = connectionRepository.findById(id).orElseThrow(
                 () -> new BusinessException("The connection with the inserted id does not exist!")
         );
         connectionToUpdate.setStatus(connectionUpdate.getStatus());
     }
 
-    public void deleteConnection(Long id) {
+    public void deleteConnection(Integer id) {
         Connection connectionToDelete = connectionRepository.findById(id).orElseThrow(() ->
                 new BusinessException("The connection that you want to delete does not exist!"));
         connectionRepository.deleteById(connectionToDelete.getId());
