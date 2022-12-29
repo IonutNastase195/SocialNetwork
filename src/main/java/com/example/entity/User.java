@@ -23,32 +23,23 @@ public class User {
     @Column
     @NotBlank
     private String name;
-
-    @Column(unique = true)
+    @Column
     @NotBlank
     private String email;
-
-    @Column
     private String password;
-
     @OneToMany
     private List<Connection> connections;
-
     @ManyToMany
     @JoinTable(name = "attendees",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
     private List<Event> events;
-
     @OneToMany
     private List<Friendship> friendships;
-
     @OneToMany
     private List<Group> groups;
-
     @OneToMany
     private List<Post> posts;
-
 
 }

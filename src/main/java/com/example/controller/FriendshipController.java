@@ -21,7 +21,7 @@ public class FriendshipController {
     private final FriendshipService friendshipService;
     private final FriendshipMapper friendshipMapper;
 
-    @GetMapping("/friendships")
+    @GetMapping()
     public List<FriendshipResponse> getAllFriendships() {
         return friendshipService.getAllFriendships();
     }

@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS users;
 CREATE TABLE users
 (
     id       INTEGER(20)  NOT NULL AUTO_INCREMENT,
@@ -7,6 +8,7 @@ CREATE TABLE users
     PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS connections;
 CREATE TABLE connections
 (
     id            INTEGER      NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -17,6 +19,7 @@ CREATE TABLE connections
     FOREIGN KEY (connection_id) REFERENCES users (id)
 );
 
+DROP TABLE IF EXISTS events;
 CREATE TABLE events
 (
     id       INTEGER      NOT NULL AUTO_INCREMENT,
@@ -26,6 +29,7 @@ CREATE TABLE events
     PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS attendees;
 CREATE TABLE attendees
 (
     user_id  INTEGER NOT NULL,
@@ -35,6 +39,7 @@ CREATE TABLE attendees
     FOREIGN KEY (event_id) REFERENCES events (id)
 );
 
+DROP TABLE IF EXISTS friendships;
 CREATE TABLE friendships
 (
     id       INTEGER      NOT NULL AUTO_INCREMENT,
@@ -46,6 +51,7 @@ CREATE TABLE friendships
     FOREIGN KEY (user2_id) REFERENCES users (id)
 );
 
+DROP TABLE IF EXISTS t_groups;
 CREATE TABLE t_groups
 (
     id   INTEGER(20)  NOT NULL AUTO_INCREMENT,
@@ -53,6 +59,7 @@ CREATE TABLE t_groups
     PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS group_members;
 CREATE TABLE group_members
 (
     group_id INTEGER(20) NOT NULL,
@@ -62,6 +69,7 @@ CREATE TABLE group_members
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS post;
 CREATE TABLE post
 (
     id         INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -75,6 +83,7 @@ CREATE TABLE post
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
+DROP TABLE IF EXISTS comments;
 CREATE TABLE comments
 (
     id         INTEGER PRIMARY KEY AUTO_INCREMENT,

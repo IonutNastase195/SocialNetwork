@@ -1,11 +1,6 @@
 package com.example.model.user;
 
 import lombok.*;
-
-import java.time.LocalDateTime;
-
-
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
