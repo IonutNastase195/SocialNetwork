@@ -9,5 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class ConnectionUpdate {
+    private Integer id;
     private String status;
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 @Data
 public class EventUpdate {
+    private Integer id;
     private String name;
     private String location;
     private LocalDateTime date;

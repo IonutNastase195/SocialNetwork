@@ -1,6 +1,5 @@
 package com.example.service;
 
-import com.example.entity.Connection;
 import com.example.entity.Group;
 import com.example.entity.User;
 import com.example.exception.BusinessException;
@@ -39,17 +38,19 @@ public class GroupService {
 
     public GroupResponse createGroup(GroupRequest groupRequest) {
         Group group = groupMapper.toEntity(groupRequest);
-        group.setMembers(getUsersByIds(groupRequest.getMembers()));
+        group.setMembers(getUsersByIds(groupRequest.getMembersId()));
         Group groupSaved = groupRepository.save(group);
         return groupMapper.toResponse(groupSaved);
     }
 
-    public void updateGroupById(Integer id, GroupUpdate groupUpdate) {
+    public GroupResponse updateGroupById(Integer id, GroupUpdate groupUpdate) {
         Group groupToUpdate = groupRepository.findById(id).orElseThrow(
                 () -> new BusinessException("The group with the inserted id does not exist!")
         );
         groupToUpdate.setName(groupUpdate.getName());
         groupToUpdate.setMembers(getUsersByIds(groupUpdate.getMembers()));
+    //-nu stiu daca e ok
+        return null;
     }
 
     public void deleteGroup(Integer id) {

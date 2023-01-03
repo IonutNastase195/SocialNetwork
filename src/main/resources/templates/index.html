@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Social Network</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link th:href="@{/css/index.css}" rel="stylesheet">
+    <style>
+        body {
+            background-color: #E9EBEE;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid bg-white p-3">
+    <div class="row align-items-center">
+        <div class="col-3">
+            <a href="#"><img src="/images/logo.png" alt="Logo" width="100"></a>
+        </div>
+        <div class="col-9">
+            <form class="form-inline mb-0">
+                <input class="form-control mr-2" type="text" placeholder="Search">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center font-weight-bold">Welcome, <span
+                            th:text="${user.name}">User</span></h5>
+                    <hr>
+                    <div class="row">
+
+                        <div class="col-12">
+                            <a href="myProfile.html">
+                                <button type="button" class="btn btn-primary btn-block mb-3">My Profile</button>
+                            </a>
+                        </div>
+
+                        <div class="col-12">
+                            <a href="friends.html">
+                                <button type="button" class="btn btn-primary btn-block mb-3">Friends</button>
+                            </a>
+                        </div>
+
+                        <div class="col-12">
+                            <a href="messages.html">
+                                <button type="button" class="btn btn-primary btn-block mb-3">Messages</button>
+                            </a>
+                        </div>
+
+                        <div class="col-12">
+                            <a href="groupsPage.html">
+                                <button type="button" class="btn btn-primary btn-block mb-3">Groups</button>
+                            </a>
+                        </div>
+
+                        <div class="col-12">
+                            <a href="allEvents.html">
+                                <button type="button" class="btn btn-primary btn-block mb-3">Events</button>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold mb-3">Create a New Event</h5>
+                    <form th:action="@{/events/create}" method="post">
+                        <div class="form-group">
+                            <label for="nameInput">Event Name</label>
+                            <input type="text" class="form-control" id="nameInput" name="name"
+                                   placeholder="Enter event name">
+                        </div>
+                        <div class="form-group">
+                            <label for="descriptionInput">Event Description</label>
+                            <textarea class="form-control" id="descriptionInput" name="description" rows="3"
+                                      placeholder="Enter event description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="locationInput">Event Location</label>
+                            <input type="text" class="form-control" id="locationInput" name="location"
+                                   placeholder="Enter event location">
+                        </div>
+                        <div class="form-group">
+                            <label for="dateInput">Event Date</label>
+                            <input type="date" class="form-control" id="dateInput" name="date">
+                        </div>
+                        <button type="submit" class="btn btn-primary float-right">Create Event</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-AZggepTpTfM8T8W23TjKDVwngO2sL8H1dKjvB7V1NkgxR0j0yWd2v2hVJ3rx6c/7"
+        crossorigin="anonymous"></script>
+</body>
+</html>

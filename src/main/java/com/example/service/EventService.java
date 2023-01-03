@@ -10,11 +10,11 @@ import com.example.model.event.EventUpdate;
 import com.example.repository.EventRepository;
 import com.example.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,7 +44,7 @@ public class EventService {
         return eventMapper.toResponse(eventSaved);
     }
 
-    public void updateEventById(Integer id, EventUpdate eventUpdate) {
+    public EventResponse updateEventById(Integer id, @NotNull EventUpdate eventUpdate) {
         Event eventToUpdate = eventRepository.findById(id).orElseThrow(
                 () -> new BusinessException("The event with the inserted id does not exist!")
         );
@@ -52,6 +52,7 @@ public class EventService {
         eventToUpdate.setLocation(eventUpdate.getLocation());
         eventToUpdate.setDate(eventUpdate.getDate());
         eventToUpdate.setAttendees(getUsersByIds(eventUpdate.getAttendees()));
+        return null;
     }
 
     public void deleteEvent(Integer id) {

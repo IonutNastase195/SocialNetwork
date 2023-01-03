@@ -1,6 +1,5 @@
 package com.example.service;
 
-import com.example.entity.Connection;
 import com.example.entity.Friendship;
 import com.example.entity.User;
 import com.example.exception.BusinessException;
@@ -50,11 +49,12 @@ public class FriendshipService {
         return friendshipMapper.toResponse(friendshipSaved);
     }
 
-    public void updateFriendshipById(Integer id, FriendshipUpdate friendshipUpdate) {
+    public Friendship updateFriendshipById(Integer id, FriendshipUpdate friendshipUpdate) {
         Friendship friendshipToUpdate = friendshipRepository.findById(id).orElseThrow(
                 () -> new BusinessException("The friendship with the inserted id does not exist!")
         );
         friendshipToUpdate.setStatus(friendshipUpdate.getStatus());
+        return friendshipToUpdate;
     }
 
     public void deleteFriendship(Integer id) {

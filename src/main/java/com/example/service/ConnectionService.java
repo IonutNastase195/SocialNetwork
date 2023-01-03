@@ -51,11 +51,12 @@ public class ConnectionService {
         return connectionMapper.toResponse(connectionSaved);
     }
 
-    public void updateConnectionById(Integer id, ConnectionUpdate connectionUpdate) {
+    public ConnectionResponse updateConnectionById(Integer id, ConnectionUpdate connectionUpdate) {
         Connection connectionToUpdate = connectionRepository.findById(id).orElseThrow(
                 () -> new BusinessException("The connection with the inserted id does not exist!")
         );
         connectionToUpdate.setStatus(connectionUpdate.getStatus());
+        return null;
     }
 
     public void deleteConnection(Integer id) {

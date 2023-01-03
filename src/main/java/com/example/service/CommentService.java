@@ -51,11 +51,12 @@ public class CommentService {
         return commentMapper.toResponse(commentSaved);
     }
 
-    public void updateCommentById(Integer id, CommentUpdate commentUpdate) {
+    public CommentResponse updateCommentById(Integer id, CommentUpdate commentUpdate) {
         Comment commentToUpdate = commentRepository.findById(id).orElseThrow(
                 () -> new BusinessException("The comment with the inserted id does not exist!")
         );
         commentToUpdate.setText(commentUpdate.getContent());
+        return null;
     }
 
     public void deleteComment(Integer id) {

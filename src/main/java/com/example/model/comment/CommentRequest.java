@@ -2,8 +2,7 @@ package com.example.model.comment;
 
 import lombok.*;
 
-@Getter
-@Setter
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

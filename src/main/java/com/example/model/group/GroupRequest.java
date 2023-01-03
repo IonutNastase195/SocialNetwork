@@ -1,12 +1,14 @@
 package com.example.model.group;
 
+import jdk.jshell.Snippet;
 import lombok.*;
 
 import java.util.List;
 @Data
 public class GroupRequest {
     private String name;
-    private List<Integer> members;
+    private List<Integer> membersId;
+
 }
 
 
