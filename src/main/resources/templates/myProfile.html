@@ -13,9 +13,10 @@
     <div class="row">
         <div class="col-3">
             <div class="card">
-                <img src="/images/profile.jpg" alt="Profile" class="card-img-top">
+<!--                <img src="/images/profile.jpg" alt="Profile" class="card-img-top">-->
                 <div class="card-body">
-                    <h5 class="card-title font-weight-bold" th:text="${user.name}">User Name</h5>
+                    <h5 class="card-title font-weight-bold" th:if="${user != null}" th:text="${user.name}">User Name</h5>
+                    <p class="card-text" th:if="${user != null}" th:text="${user.email}">user@example.com</p>
                     <p class="card-text" th:text="${user.email}">user@example.com</p>
                     <form th:action="@{/profile/update}" method="get">
                         <button type="submit" class="btn btn-primary btn-block mt-3">Update Profile</button>

@@ -6,15 +6,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class UserRequest {
     private Integer id;
     private String name;
     private String email;
     private String password;
+
 }
 
 

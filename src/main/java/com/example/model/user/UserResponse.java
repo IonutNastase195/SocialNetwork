@@ -1,10 +1,10 @@
 package com.example.model.user;
 
 import lombok.*;
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class UserResponse {
     private String name;
     private String email;

@@ -20,7 +20,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title text-center font-weight-bold mb-4">Create Account</h5>
-          <form th:action="@{/createAccount}" th:object="${user}" method="POST">
+          <form th:action="@{/createUserPage}" th:object="${userFromWeb}" method="post">
             <div class="form-group">
               <input type="text" th:field="*{name}" placeholder="Enter name" class="form-control col-4 mb-4" />
             </div>
@@ -28,7 +28,7 @@
               <input type="text" th:field="*{email}" placeholder="Enter email" class="form-control col-4 mb-4" />
             </div>
             <div class="form-group">
-              <input type="text" th:field="*{password}" placeholder="Enter password" class="form-control col-4 mb-4" />
+              <input type="password" th:field="*{password}" placeholder="Enter password" class="form-control col-4 mb-4" />
             </div>
             <div class="form-group">
               <button class="btn btn-primary" type="submit">Create Account</button>
@@ -36,7 +36,7 @@
           </form>
           <hr>
           <div class="text-center">
-            <a href="loginPage.html" th:href="@{/login}">Already have an account?</a>
+            <a href="/goToLoginPage" th:href="@{/loginPage}">Already have an account?</a>
           </div>
         </div>
       </div>
@@ -45,3 +45,5 @@
 </div>
 </body>
 </html>
+
+

@@ -31,7 +31,6 @@ D:\Curs\SocialNetwork\src\main\java\com\example\controller\web\CommentWebControl
 D:\Curs\SocialNetwork\src\main\java\com\example\controller\ConnectionController.java
 D:\Curs\SocialNetwork\src\main\java\com\example\repository\PostRepository.java
 D:\Curs\SocialNetwork\src\main\java\com\example\entity\Friendship.java
-D:\Curs\SocialNetwork\src\main\java\com\example\controller\web\CsrfToken.java
 D:\Curs\SocialNetwork\src\main\java\com\example\model\comment\CommentRequest.java
 D:\Curs\SocialNetwork\src\main\java\com\example\model\group\GroupUpdate.java
 D:\Curs\SocialNetwork\src\main\java\com\example\controller\GroupController.java

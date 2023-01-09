@@ -18,7 +18,6 @@ import java.util.List;
 public class EventController {
 
     private final EventService eventService;
-    private final EventMapper eventMapper;
 
     @GetMapping("/events")
     public List<EventResponse> getAllEvents() {

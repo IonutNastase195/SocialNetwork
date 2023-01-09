@@ -31,39 +31,31 @@
         <div class="col-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title text-center font-weight-bold">Welcome, <span
-                            th:text="${user.name}">User</span></h5>
-                    <hr>
+                    <h5 class="card-title text-center font-weight-bold" th:if="${userDetailsSession.getUser()} != null">
+                        Welcome, <span th:text="${userDetailsSession.getUser()}">User</span></h5>
                     <div class="row">
 
                         <div class="col-12">
-                            <a href="myProfile.html">
-                                <button type="button" class="btn btn-primary btn-block mb-3">My Profile</button>
-                            </a>
+                            <a href="/myProfile" class="btn btn-primary btn-block mb-3">My Profile</a>
+
                         </div>
 
                         <div class="col-12">
-                            <a href="friends.html">
-                                <button type="button" class="btn btn-primary btn-block mb-3">Friends</button>
-                            </a>
+                            <a href="/friends" class="btn btn-primary btn-block mb-3">Friends</a>
                         </div>
 
                         <div class="col-12">
-                            <a href="messages.html">
-                                <button type="button" class="btn btn-primary btn-block mb-3">Messages</button>
-                            </a>
+                            <a href="/messages" class="btn btn-primary btn-block mb-3">Messages</a>
+
                         </div>
 
                         <div class="col-12">
-                            <a href="groupsPage.html">
-                                <button type="button" class="btn btn-primary btn-block mb-3">Groups</button>
-                            </a>
+                            <a href="/groupsPage" class="btn btn-primary btn-block mb-3">Groups</a>
+
                         </div>
 
                         <div class="col-12">
-                            <a href="allEvents.html">
-                                <button type="button" class="btn btn-primary btn-block mb-3">Events</button>
-                            </a>
+                            <a href="/events" class="btn btn-primary btn-block mb-3">Events</a>
                         </div>
 
                     </div>
@@ -75,15 +67,10 @@
         <div class="col-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title font-weight-bold mb-3">Create a New Event</h5>
-                    <form th:action="@{/events/create}" method="post">
+                    <h5 class="card-title font-weight-bold mb-3">Share your thoughts with your friends </h5>
+                    <form th:action="@{/post/create}" method="post">
                         <div class="form-group">
-                            <label for="nameInput">Event Name</label>
-                            <input type="text" class="form-control" id="nameInput" name="name"
-                                   placeholder="Enter event name">
-                        </div>
-                        <div class="form-group">
-                            <label for="descriptionInput">Event Description</label>
+                            <label for="descriptionInput">Description</label>
                             <textarea class="form-control" id="descriptionInput" name="description" rows="3"
                                       placeholder="Enter event description"></textarea>
                         </div>

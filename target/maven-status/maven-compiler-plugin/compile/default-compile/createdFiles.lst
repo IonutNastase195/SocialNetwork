@@ -27,7 +27,6 @@ com\example\mapper\GroupMapperImpl.class
 com\example\repository\GroupRepository.class
 com\example\model\connection\ConnectionResponse.class
 com\example\model\connection\ConnectionRequest.class
-com\example\controller\web\CsrfToken.class
 com\example\mapper\PostMapper.class
 com\example\exception\BusinessException.class
 com\example\model\connection\ConnectionResponse$ConnectionResponseBuilder.class

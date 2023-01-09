@@ -3,7 +3,9 @@ package com.example.service;
 import com.example.entity.User;
 import com.example.exception.BusinessException;
 import com.example.mapper.UserMapper;
+import com.example.model.postLogIn.UserDetailsSession;
 import com.example.model.user.UserRequest;
+import com.example.model.user.UserRequestToLogIn;
 import com.example.model.user.UserResponse;
 import com.example.model.user.UserUpdate;
 import com.example.repository.UserRepository;
@@ -11,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.Validator;
 import java.util.List;
 
 
@@ -22,7 +23,8 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-    private Validator validator;
+    private final UserDetailsSession userDetailsSession;
+
 
     public List<UserResponse> getAllUsers() {
         return userMapper.toResponse(userRepository.findAll());
@@ -34,6 +36,31 @@ public class UserService {
         );
         return userMapper.toResponse(user);
     }
+
+    public void login(UserRequestToLogIn user) {
+        UserResponse userResponse = getUserByEmail(user.getEmail());
+        if (!userResponse.getPassword().equals(user.getPassword())) {
+            throw new RuntimeException("Invalid password");
+        }
+        userDetailsSession.setUser(user.getEmail());
+        userDetailsSession.setPassword(user.getPassword());
+    }
+
+    public UserResponse getUserByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
+        return convertToUserResponse(user);
+    }
+
+    private UserResponse convertToUserResponse(User user) {
+        UserResponse userResponse = new UserResponse();
+        userResponse.setEmail(user.getEmail());
+        userResponse.setPassword(user.getPassword());
+        return userResponse;
+    }
+
 
     public UserResponse createUser(UserRequest userRequest) {
         User user = userMapper.toEntity(userRequest);
@@ -58,7 +85,4 @@ public class UserService {
         }
     }
 
-    public User findByEmailAndPassword(String email, String password) {
-        return userRepository.findByEmailAndPassword(email, password);
-    }
 }

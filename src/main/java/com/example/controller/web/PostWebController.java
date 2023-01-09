@@ -27,10 +27,10 @@ public class PostWebController {
         return "postByIdPage";
     }
 
-    @PostMapping("/users/{userId}/posts")
+    @PostMapping("/post/create")
     public String createPost(@PathVariable Integer userId, @ModelAttribute PostRequest postRequest, Model model) {
         model.addAttribute("post", postService.createPost(userId, postRequest));
-        return "postByIdPage";
+        return "index";
     }
 
     @PostMapping("/{id}")

@@ -19,7 +19,6 @@ import java.util.Optional;
 public class FriendshipController {
 
     private final FriendshipService friendshipService;
-    private final FriendshipMapper friendshipMapper;
 
     @GetMapping()
     public List<FriendshipResponse> getAllFriendships() {
