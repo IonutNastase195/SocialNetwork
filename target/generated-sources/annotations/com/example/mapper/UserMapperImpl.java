@@ -1,5 +1,6 @@
 package com.example.mapper;
 
+import com.example.entity.Friendship;
 import com.example.entity.User;
 import com.example.model.user.UserRequest;
 import com.example.model.user.UserResponse;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-08T11:56:33+0200",
+    date = "2023-01-14T20:35:22+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -59,5 +60,29 @@ public class UserMapperImpl implements UserMapper {
         }
 
         return list;
+    }
+
+    @Override
+    public List<UserResponse> toResponseF(List<Friendship> friendships) {
+        if ( friendships == null ) {
+            return null;
+        }
+
+        List<UserResponse> list = new ArrayList<UserResponse>( friendships.size() );
+        for ( Friendship friendship : friendships ) {
+            list.add( friendshipToUserResponse( friendship ) );
+        }
+
+        return list;
+    }
+
+    protected UserResponse friendshipToUserResponse(Friendship friendship) {
+        if ( friendship == null ) {
+            return null;
+        }
+
+        UserResponse.UserResponseBuilder userResponse = UserResponse.builder();
+
+        return userResponse.build();
     }
 }

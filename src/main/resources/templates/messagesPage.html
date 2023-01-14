@@ -16,11 +16,9 @@
         <div class="card-body">
           <h5 class="card-title font-weight-bold mb-3" th:text="${selectedFriend.name}">Friend Name</h5>
           <div th:each="message: ${messages}" class="media mt-3">
-            <img src="/images/profile.jpg" alt="Profile" width="50" class="mr-3" th:if="${message.from.id == user.id}" />
             <div class="media-body" th:class="${message.from.id == user.id} ? 'bg-light' : 'bg-secondary text-white'">
               <p th:text="${message.content}">Message Content</p>
             </div>
-            <img src="/images/profile.jpg" alt="Profile" width="50" class="ml-3" th:if="${message.from.id != user.id}" />
           </div>
           <form>
             <div class="form-group mt-3">

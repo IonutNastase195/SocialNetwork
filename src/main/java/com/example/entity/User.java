@@ -27,8 +27,6 @@ public class User {
     @NotBlank
     private String email;
     private String password;
-    @OneToMany
-    private List<Connection> connections;
     @ManyToMany
     @JoinTable(name = "attendees",
             joinColumns = @JoinColumn(name = "user_id"),

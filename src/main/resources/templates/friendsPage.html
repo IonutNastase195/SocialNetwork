@@ -1,0 +1,24 @@
+<h2>My Friends</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="friend : ${currentFriends}">
+        <td th:text="${friend.name}"></td>
+        <td th:text="${friend.email}"></td>
+        <td>
+            <form th:action="@{/removeFriendship}" th:object="${friend}" method="post">
+                <input type="submit" value="Unfriend" class="btn btn-danger">
+                <input type="hidden" th:field="*{id}">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

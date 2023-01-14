@@ -13,88 +13,80 @@
     </style>
 </head>
 <body>
-<div class="container-fluid bg-white p-3">
-    <div class="row align-items-center">
-        <div class="col-3">
-            <a href="#"><img src="/images/logo.png" alt="Logo" width="100"></a>
-        </div>
-        <div class="col-9">
-            <form class="form-inline mb-0">
-                <input class="form-control mr-2" type="text" placeholder="Search">
-                <button class="btn btn-primary" type="submit">Search</button>
-            </form>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Social Network</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/index">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/myProfile">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/friends">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/messages">Messages</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/groupsPage">Groups</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/events">Events</a>
+            </li>
+        </ul>
     </div>
-</div>
+</nav>
 <div class="container mt-3">
     <div class="row">
         <div class="col-3">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center font-weight-bold" th:if="${userDetailsSession.getUser()} != null">
-                        Welcome, <span th:text="${userDetailsSession.getUser()}">User</span></h5>
+                        Welcome, <span th:text="${userDetailsSession.getUser().getName()}">User</span></h5>
                     <div class="row">
-
                         <div class="col-12">
                             <a href="/myProfile" class="btn btn-primary btn-block mb-3">My Profile</a>
-
                         </div>
-
                         <div class="col-12">
                             <a href="/friends" class="btn btn-primary btn-block mb-3">Friends</a>
                         </div>
-
                         <div class="col-12">
                             <a href="/messages" class="btn btn-primary btn-block mb-3">Messages</a>
-
                         </div>
-
                         <div class="col-12">
                             <a href="/groupsPage" class="btn btn-primary btn-block mb-3">Groups</a>
-
                         </div>
-
                         <div class="col-12">
                             <a href="/events" class="btn btn-primary btn-block mb-3">Events</a>
                         </div>
-
+                        <div class="col-12">
+                            <a href="/logout" class="btn btn-danger btn-block mb-3">Logout</a>
+                        </div>
                     </div>
-
-
                 </div>
             </div>
-        </div>
-        <div class="col-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bold mb-3">Share your thoughts with your friends </h5>
-                    <form th:action="@{/post/create}" method="post">
-                        <div class="form-group">
-                            <label for="descriptionInput">Description</label>
-                            <textarea class="form-control" id="descriptionInput" name="description" rows="3"
-                                      placeholder="Enter event description"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="locationInput">Event Location</label>
-                            <input type="text" class="form-control" id="locationInput" name="location"
-                                   placeholder="Enter event location">
-                        </div>
-                        <div class="form-group">
-                            <label for="dateInput">Event Date</label>
-                            <input type="date" class="form-control" id="dateInput" name="date">
-                        </div>
-                        <button type="submit" class="btn btn-primary float-right">Create Event</button>
-                    </form>
+            <div class="col-9">
+                <div class="text-right">
+                    <div class="jumbotron text-center">
+                        <h1 class="display-4">Welcome to Social Network</h1>
+                        <p class="lead">Connect with friends, family and people you know</p>
+                        <hr class="my-4">
+                        <p>Join groups, events and start conversations</p>
+                        <p class="lead">
+                            <a class="btn btn-primary btn-lg" href="/register" role="button">Join now</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-AZggepTpTfM8T8W23TjKDVwngO2sL8H1dKjvB7V1NkgxR0j0yWd2v2hVJ3rx6c/7"
-        crossorigin="anonymous"></script>
 </body>
 </html>

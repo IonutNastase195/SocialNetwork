@@ -7,6 +7,7 @@ import com.example.mapper.GroupMapper;
 import com.example.model.group.GroupRequest;
 import com.example.model.group.GroupResponse;
 import com.example.model.group.GroupUpdate;
+import com.example.model.afterLogIn.UserDetailsSession;
 import com.example.repository.GroupRepository;
 import com.example.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class GroupService {
     private final GroupRepository groupRepository;
     private final GroupMapper groupMapper;
     private final UserRepository userRepository;
+    private final UserDetailsSession userDetailsSession;
 
     public List<GroupResponse> getAllGroups() {
         return groupMapper.toResponse(groupRepository.findAll());
@@ -64,5 +66,10 @@ public class GroupService {
                 userRepository.findById(userId).orElseThrow(() ->
                         new BusinessException("User not found!"))
         ).collect(Collectors.toList());
+    }
+
+    public List<Group> getCurrentUserGroups() {
+        User currentUser = userDetailsSession.getUser();
+        return groupRepository.findByMembersContaining(currentUser);
     }
 }

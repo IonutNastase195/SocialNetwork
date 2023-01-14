@@ -19,10 +19,10 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center font-weight-bold mb-4">Success</h5>
-                    <p th:text="${#messages}">Account successfully created!</p>
+                    <p>Account successfully created!</p>
                     <div class="form-group">
-                        <a  href="/loginPage" class="btn btn-primary btn-block">Login Here</a>
-                        <a th:href="@{/createUserPage}" class="btn btn-primary btn-block">Create Another Account?</a>
+                        <a  th:href="@{/loginPage}" class="btn btn-primary btn-block">Login Here</a>
+                        <a href="/createUserPage" class="btn btn-primary btn-block">Create Another Account?</a>
                     </div>
                 </div>
             </div>

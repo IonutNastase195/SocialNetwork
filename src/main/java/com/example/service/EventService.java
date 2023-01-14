@@ -7,6 +7,7 @@ import com.example.mapper.EventMapper;
 import com.example.model.event.EventRequest;
 import com.example.model.event.EventResponse;
 import com.example.model.event.EventUpdate;
+import com.example.model.afterLogIn.UserDetailsSession;
 import com.example.repository.EventRepository;
 import com.example.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ public class EventService {
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
     private final UserRepository userRepository;
+    private final UserDetailsSession userDetailsSession;
 
     public List<EventResponse> getAllEvents() {
         return eventMapper.toResponse(eventRepository.findAll());
@@ -66,6 +68,11 @@ public class EventService {
                 userRepository.findById(userId).orElseThrow(() ->
                         new BusinessException("User not found!"))
         ).collect(Collectors.toList());
+    }
+
+    public List<Event> getCurrentUserEvents() {
+        User currentUser = userDetailsSession.getUser();
+        return eventRepository.findByAttendeesContaining(currentUser);
     }
 }
 

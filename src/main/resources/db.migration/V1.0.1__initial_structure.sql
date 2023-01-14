@@ -8,17 +8,6 @@ CREATE TABLE users
     PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS connections;
-CREATE TABLE connections
-(
-    id            INTEGER      NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    user_id       INTEGER      NOT NULL,
-    connection_id INTEGER      NOT NULL,
-    status        VARCHAR(255) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (connection_id) REFERENCES users (id)
-);
-
 DROP TABLE IF EXISTS events;
 CREATE TABLE events
 (
