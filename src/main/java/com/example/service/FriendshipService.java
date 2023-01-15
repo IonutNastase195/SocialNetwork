@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,12 +41,9 @@ public class FriendshipService {
     }
 
     public FriendshipResponse createFriendship(FriendshipRequest friendshipRequest) {
-        User user1 = userRepository.findById(friendshipRequest.getUser1Id()).orElseThrow(
-                () -> new BusinessException("User1 not found!")
-        );
-        User user2 = userRepository.findById(friendshipRequest.getUser2Id()).orElseThrow(
-                () -> new BusinessException("User2 not found!")
-        );
+        User user1 = userRepository.findById(friendshipRequest.getUser1Id()).orElseThrow(() -> new BusinessException("User1 not found!"));
+        User user2 = userRepository.findById(friendshipRequest.getUser2Id()).orElseThrow(() -> new BusinessException("User2 not found!"));
+
         Friendship friendship = friendshipMapper.toEntity(friendshipRequest);
         friendship.setUser1(user1);
         friendship.setUser2(user2);

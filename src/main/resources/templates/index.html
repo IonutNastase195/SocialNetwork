@@ -31,9 +31,6 @@
                 <a class="nav-link" href="/friends">Friends</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/messages">Messages</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/groupsPage">Groups</a>
             </li>
             <li class="nav-item">
@@ -41,52 +38,60 @@
             </li>
         </ul>
     </div>
+    <form class="form-inline my-2 my-lg-0" th:action="@{/logoutPage}" method="post">
+        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+    </form>
 </nav>
-<div class="container mt-3">
+<div class="container">
     <div class="row">
-        <div class="col-3">
+        <div class="col-md-12">
+            <div class="jumbotron text-center">
+                <h1 class="display-4">Welcome to Social Network</h1>
+                <p class="lead">Connect with friends, family and people you know</p>
+                <h5 class="card-title text-center font-weight-bold" th:if="${userDetailsSession.getUser()} != null">
+                    Welcome, <span th:text="${userDetailsSession.getUser().getName()}">User</span></h5>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title text-center font-weight-bold" th:if="${userDetailsSession.getUser()} != null">
-                        Welcome, <span th:text="${userDetailsSession.getUser().getName()}">User</span></h5>
-                    <div class="row">
-                        <div class="col-12">
-                            <a href="/myProfile" class="btn btn-primary btn-block mb-3">My Profile</a>
+                    <form th:action="@{/createPost}" method="post">
+                        <div class="form-group">
+                            <label for="postContent">What's on your mind?</label>
+                            <textarea class="form-control" id="postContent" name="postContent" rows="3"></textarea>
                         </div>
-                        <div class="col-12">
-                            <a href="/friends" class="btn btn-primary btn-block mb-3">Friends</a>
-                        </div>
-                        <div class="col-12">
-                            <a href="/messages" class="btn btn-primary btn-block mb-3">Messages</a>
-                        </div>
-                        <div class="col-12">
-                            <a href="/groupsPage" class="btn btn-primary btn-block mb-3">Groups</a>
-                        </div>
-                        <div class="col-12">
-                            <a href="/events" class="btn btn-primary btn-block mb-3">Events</a>
-                        </div>
-                        <div class="col-12">
-                            <a href="/logout" class="btn btn-danger btn-block mb-3">Logout</a>
-                        </div>
-                    </div>
+                        <button type="submit" class="btn btn-primary">Post</button>
+                    </form>
                 </div>
             </div>
-            <div class="col-9">
-                <div class="text-right">
-                    <div class="jumbotron text-center">
-                        <h1 class="display-4">Welcome to Social Network</h1>
-                        <p class="lead">Connect with friends, family and people you know</p>
-                        <hr class="my-4">
-                        <p>Join groups, events and start conversations</p>
-                        <p class="lead">
-                            <a class="btn btn-primary btn-lg" href="/register" role="button">Join now</a>
-                        </p>
+        </div>
+    </div>
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card-columns">
+                <div class="card" th:each="post : ${allPosts}">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${post.user.name}"></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"
+                            th:text="${#dates.format(post.createdAt, 'dd/MM/yyyy HH:mm')}"></h6>
+                        <p class="card-text" th:text="${post.text}"></p>
+                        <form th:action="@{/likePost}" th:object="${post}" method="post">
+                            <input type="submit" value="Like" class="btn btn-primary">
+                            <input type="hidden" th:field="*{id}">
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>

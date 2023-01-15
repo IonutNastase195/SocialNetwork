@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-public class LogInController {
+public class LogInAndOutController {
     private final UserService userService;
     private final UserDetailsSession userDetailsSession;
-
-
 
     @GetMapping("/loginPage")
     public String goToLogInPage(Model model) {
@@ -34,5 +32,21 @@ public class LogInController {
             model.addAttribute("error", e.getMessage());
             return "loginPage";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        try {
+            userDetailsSession.clear();
+            return "loginPage";
+        } catch (Exception e) {
+            return "error";
+        }
+    }
+
+    @PostMapping("/logout")
+    public String logoutPage() {
+        userDetailsSession.clear();
+        return "loginPage";
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-14T20:35:22+0200",
+    date = "2023-01-15T20:49:22+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -27,10 +27,8 @@ public class PostMapperImpl implements PostMapper {
         Post.PostBuilder post = Post.builder();
 
         post.text( postRequest.getText() );
-        post.media( postRequest.getMedia() );
         post.likes( postRequest.getLikes() );
         post.comments( postRequest.getComments() );
-        post.shares( postRequest.getShares() );
 
         return post.build();
     }
@@ -76,6 +74,7 @@ public class PostMapperImpl implements PostMapper {
 
         UserResponse.UserResponseBuilder userResponse = UserResponse.builder();
 
+        userResponse.id( user.getId() );
         userResponse.name( user.getName() );
         userResponse.email( user.getEmail() );
         userResponse.password( user.getPassword() );

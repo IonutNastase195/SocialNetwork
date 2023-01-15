@@ -1,0 +1,14 @@
+INSERT INTO friendships (user1_id, user2_id, status) VALUES (1, 14, 'pending');
+INSERT INTO friendships (user1_id, user2_id, status) VALUES (2, 13, 'accepted');
+INSERT INTO friendships (user1_id, user2_id, status) VALUES (3, 12, 'pending');
+INSERT INTO friendships (user1_id, user2_id, status) VALUES (4, 11, 'pending');
+INSERT INTO friendships (user1_id, user2_id, status) VALUES (5, 10, 'accepted');
+INSERT INTO friendships (user1_id, user2_id, status) VALUES (6, 9, 'pending');
+INSERT INTO friendships (user1_id, user2_id, status) VALUES (7, 8, 'accepted');
+INSERT INTO friendships (user1_id, user2_id, status) VALUES (7, 7, 'pending');
+INSERT INTO friendships (user1_id, user2_id, status) VALUES (8, 6, 'accepted');
+INSERT INTO friendships (user1_id, user2_id, status) VALUES (10, 5, 'pending');
+INSERT INTO friendships (user1_id, user2_id, status) VALUES (11, 4, 'accepted');
+INSERT INTO friendships (user1_id, user2_id, status) VALUES (12, 3, 'pending');
+INSERT INTO friendships (user1_id, user2_id, status) VALUES (13, 2, 'accepted');
+INSERT INTO friendships (user1_id, user2_id, status) VALUES (14, 1, 'pending');

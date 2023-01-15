@@ -1,29 +1,41 @@
 package com.example.controller.web;
 
-import com.example.model.friendship.FriendshipResponse;
+import com.example.entity.User;
 import com.example.model.afterLogIn.UserDetailsSession;
+import com.example.model.post.PostRequest;
 import com.example.model.user.UserRequest;
+import com.example.model.user.UpdateProfileRequest;
+import com.example.model.user.UserResponse;
 import com.example.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
     private final EventService eventService;
-    private final FriendshipService friendshipService;
     private final GroupService groupService;
     private final UserService userService;
     private final UserDetailsSession userDetailsSession;
+    private final PostService postService;
 
-    @GetMapping("/")
-    public String goToIndexPage(Model model) {
-        model.addAttribute("userDetailsSession", userDetailsSession);
-        return "index";
+    @GetMapping("/createUserPage")
+    public String goToCreateUserPage(Model model) {
+        model.addAttribute("userFromWeb", new UserRequest());
+        return "createUserPage";
+    }
+
+    @PostMapping("/createUserPage")
+    public String createAccount(@ModelAttribute(value = "createUserRequest") UserRequest userRequest, Model model) {
+        try {
+            userService.createUser(userRequest);
+            return "success";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "error";
+        }
     }
 
     @GetMapping("/myProfile")
@@ -32,32 +44,40 @@ public class HomeController {
         return "myProfilePage";
     }
 
-    @GetMapping("/friends")
-    public String goToFriendsPage(Model model) {
-        model.addAttribute("friends", friendshipService.getCurrentUserFriends());
-        return "friendsPage";
+    @GetMapping("/updateProfile")
+    public String goToUpdateProfilePage(Model model) {
+        User user = userDetailsSession.getUser();
+        model.addAttribute("userProfile", user);
+        return "updateProfile";
+        //redirect to MyProfile page
     }
 
-    @PostMapping("/friends/add")
-    public String addFriend(@ModelAttribute(value = "friend") UserRequest friend, Model model) {
+    @PostMapping("/updateProfile")
+    public String updateProfile(@ModelAttribute(value = "updateProfileRequest") UpdateProfileRequest updateProfileRequest, Model model) {
         try {
-            userService.addFriend(userDetailsSession.getUser().getId(), friend);
-            model.addAttribute("friends", userService.getCurrentUserFriends());
-            return "redirect:/friends";
+            UserResponse userResponse = userService.updateProfile(updateProfileRequest);
+            model.addAttribute("user", userResponse);
+            return "profileUpdated";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
-            return "friendsPage";
+            return "error";
         }
     }
 
-    @PostMapping("/friends/remove")
-    public String removeFriend(@ModelAttribute(value = "friend") UserRequest friend, Model model) {
+    @GetMapping("/createPost")
+    public String goToCreatePost(Model model) {
+        model.addAttribute("post", postService.createPost(userDetailsSession.getId(), new PostRequest()));
+        return "index";
+    }
+
+    @PostMapping("/createPost")
+    public String createPost(@ModelAttribute(value = "post") PostRequest postRequest, Model model) {
         try {
-            friendshipService.removeFriendship(userService.getCurrentUserProfile(), friend);
-            return "redirect:/friends";
+            postService.createPost(userDetailsSession.getId(),postRequest);
+            return "index";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
-            return "friendsPage";
+            return "error";
         }
     }
 
@@ -79,70 +99,6 @@ public class HomeController {
         return "allUsersPage";
     }
 
-
-    @GetMapping("/createUserPage")
-    public String goToCreateUserPage(Model model) {
-        model.addAttribute("userFromWeb", new UserRequest());
-        return "createUserPage";
-    }
-
-    @PostMapping("/createUserPage")
-    public String createAccount(@ModelAttribute(value = "createUserRequest") UserRequest userRequest, Model model) {
-        try {
-            userService.createUser(userRequest);
-            return "success";
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "error";
-        }
-    }
-
-    @GetMapping("/index")
-    public String home(Model model) {
-        model.addAttribute("userDetailsSession", userDetailsSession);
-        return "index";
-    }
-
-    @GetMapping("/all")
-    public List<FriendshipResponse> getAllFriendships() {
-        return friendshipService.getAllFriendships();
-    }
-
-    @GetMapping("/currentUser")
-    public List<FriendshipResponse> getAllFriendshipsForCurrentUser() {
-        return friendshipService.getAllFriendships();
-    }
-
-    @PutMapping("/{id}/accept")
-    public void acceptFriendshipRequest(@PathVariable Integer id) {
-        friendshipService.acceptFriendship(id, id);
-    }
-
-    @PostMapping("/addFriendship")
-    public String addFriendship(@ModelAttribute(value = "user") UserRequest user, Model model) {
-        try {
-            friendshipService.addFriendship(userDetailsSession.getUser().getId(), user.getId());
-            model.addAttribute("friends", friendshipService.getCurrentUserFriends());
-            return "redirect:/friends";
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "allUsersPage";
-        }
-    }
-
-    @PostMapping("/removeFriendship")
-    public String removeFriendship(@ModelAttribute(value = "friend") UserRequest friend, Model model) {
-        try {
-            friendshipService.removeFriendship(userDetailsSession.getUser(), friend);
-            model.addAttribute("friends", friendshipService.getCurrentUserFriends());
-            return "redirect:/friends";
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "friendsPage";
-        }
-
-    }
-
-
 }
+
 
