@@ -25,6 +25,7 @@ D:\Curs\SocialNetwork\src\main\java\com\example\service\PostService.java
 D:\Curs\SocialNetwork\src\main\java\com\example\model\group\GroupRequest.java
 D:\Curs\SocialNetwork\src\main\java\com\example\repository\PostRepository.java
 D:\Curs\SocialNetwork\src\main\java\com\example\entity\Friendship.java
+D:\Curs\SocialNetwork\src\main\java\com\example\model\user\UserList.java
 D:\Curs\SocialNetwork\src\main\java\com\example\model\comment\CommentRequest.java
 D:\Curs\SocialNetwork\src\main\java\com\example\model\group\GroupUpdate.java
 D:\Curs\SocialNetwork\src\main\java\com\example\controller\GroupController.java

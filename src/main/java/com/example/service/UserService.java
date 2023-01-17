@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -31,12 +32,23 @@ public class UserService {
     private final FriendshipRepository friendshipRepository;
 
     public List<UserResponse> getAllUsers() {
+        User currentUser = userDetailsSession.getUser();
         List<User> allUsers = userRepository.findAll();
-        List<UserResponse> allUsersResponse = new ArrayList<>();
+        List<UserResponse> response = new ArrayList<>();
         for (User user : allUsers) {
-            allUsersResponse.add(userMapper.toResponse(user));
+            boolean isFriend = false;
+            if (user.getFriends().contains(currentUser.getId())) {
+                isFriend = true;
+            }
+            UserResponse userResponse = UserResponse.builder()
+                    .id(user.getId())
+                    .name(user.getName())
+                    .email(user.getEmail())
+                    .isFriend(isFriend)
+                    .build();
+            response.add(userResponse);
         }
-        return allUsersResponse;
+        return response;
     }
 
     public UserResponse getUserByEmail(String email) {
@@ -44,7 +56,7 @@ public class UserService {
         if (user == null) {
             throw new RuntimeException("User not found");
         }
-        UserResponse userResponse = userMapper.toResponse(user);
+        UserResponse userResponse = userMapper.map(user);
         userDetailsSession.setUser(user);
         return userResponse;
     }
@@ -77,8 +89,8 @@ public class UserService {
     }
 
     public UserResponse createUser(UserRequest userRequest) {
-        User user = userMapper.toEntity(userRequest);
-        return userMapper.toResponse(userRepository.save(user));
+        User user = userMapper.map(userRequest);
+        return userMapper.map(userRepository.save(user));
     }
 
     public void addFriend(Integer currentUserId, UserRequest friendRequest) {
@@ -110,9 +122,9 @@ public class UserService {
         List<UserResponse> friends = new ArrayList<>();
         for (Friendship friendship : friendships) {
             if (friendship.getUser1().getId().equals(currentUser.getId())) {
-                friends.add(userMapper.toResponse(userRepository.findById(friendship.getUser2().getId()).orElse(null)));
+                friends.add(userMapper.map(userRepository.findById(friendship.getUser2().getId()).orElse(null)));
             } else {
-                friends.add(userMapper.toResponse(userRepository.findById(friendship.getUser1().getId()).orElse(null)));
+                friends.add(userMapper.map(userRepository.findById(friendship.getUser1().getId()).orElse(null)));
             }
         }
         return friends;
@@ -134,12 +146,29 @@ public class UserService {
         user.setName(updateProfileRequest.getName());
         user.setEmail(updateProfileRequest.getEmail());
         user = userRepository.save(user);
-        UserResponse userResponse = userMapper.toResponse(user);
+        UserResponse userResponse = userMapper.map(user);
         userDetailsSession.setUser(user);
         return userResponse;
     }
 
 
+    public void update(UserRequest userRequest) {
+        User userToUpdate = userRepository.findById(userRequest.getId()).orElseThrow(
+                () -> new BusinessException(
+                        String.format("The user with id: %s not exist", userRequest.getId())
+                )
+        );
+        userToUpdate.setId(userRequest.getId());
+        userToUpdate.setName(userRequest.getName());
+        userToUpdate.setEmail(userRequest.getEmail());
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+
 }
+
 
 

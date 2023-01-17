@@ -17,10 +17,12 @@ public class Friendship {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne
+//    @JoinColumn(name = "user1_id", referencedColumnName = "id")
     @JoinColumn(name = "user1_id")
     private User user1;
     @ManyToOne
+//    @JoinColumn(name = "user2_id", referencedColumnName = "id")
     @JoinColumn(name = "user2_id")
     private User user2;
-    private String status;
+
 }

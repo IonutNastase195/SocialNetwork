@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.entity.User;
+import com.example.model.afterLogIn.UserDetailsSession;
 import com.example.model.user.UpdateProfileRequest;
 import com.example.model.user.UserRequest;
 import com.example.model.user.UserResponse;
@@ -18,10 +19,10 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("findAll")
-    public List<UserResponse> getAllUsers() {
-        return userService.getAllUsers();
-    }
+//    @GetMapping("findAll")
+//    public List<UserResponse> getAllUsers(UserResponse userResponse) {
+//        return userService.getAllUsers(userResponse);
+//    }
 
     @GetMapping("/find/{id}")
     public User getUserById(@PathVariable Integer id) {

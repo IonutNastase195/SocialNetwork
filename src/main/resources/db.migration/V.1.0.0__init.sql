@@ -14,7 +14,6 @@ CREATE TABLE friendships
     id       INTEGER      NOT NULL AUTO_INCREMENT,
     user1_id INTEGER      NOT NULL,
     user2_id INTEGER      NOT NULL,
-    status   VARCHAR(255) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (user1_id) REFERENCES users (id),
     FOREIGN KEY (user2_id) REFERENCES users (id)

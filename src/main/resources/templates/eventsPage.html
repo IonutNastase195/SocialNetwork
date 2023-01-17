@@ -37,7 +37,7 @@
     </ul>
   </div>
   <form class="form-inline my-2 my-lg-0" th:action="@{/logoutPage}" method="post">
-    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+    <a th:href="@{/loginPage}" class="btn btn-primary btn-block">Logout</a>
   </form>
 </nav>
 <div class="container mt-3">
@@ -56,14 +56,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="event, eventStat : ${events}">
-          <th scope="row" th:text="${eventStat.count}"></th>
+        <tr th:each="event : ${allEvents}">
+          <td th:text="${event.id}"></td>
           <td th:text="${event.name}"></td>
           <td th:text="${event.location}"></td>
           <td th:text="${event.date}"></td>
-          <td th:text="${event.attendees}"></td>
+          <td th:text="${event.getAttendees().size()}"></td>
           <td>
-            <form th:action="@{/events/rsvp}" th:object="${event}" method="post">
+            <form th:action="@{/events/rsvp}" th:object="${events}" method="post">
               <button type="submit" class="btn btn-primary">RSVP</button>
             </form>
           </td>

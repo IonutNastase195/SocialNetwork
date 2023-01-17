@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -42,7 +42,7 @@
         </ul>
     </div>
     <form class="form-inline my-2 my-lg-0" th:action="@{/logoutPage}" method="post">
-        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+        <a th:href="@{/loginPage}" class="btn btn-primary btn-block">Logout</a>
     </form>
 </nav>
 <h2>My Friends</h2>
@@ -56,15 +56,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="friends, eventStat : ${events}">
-        <th scope="row" th:text="${eventStat.count}"></th>
-        <td th:text="${event.name}"></td>
-        <td th:text="${event.location}"></td>
-        <td th:text="${event.date}"></td>
-        <td th:text="${event.attendees}"></td>
+    <tr th:each="friend : ${friend}">
+        <td><span th:text="${friend.id}"></span></td>
+        <td><span th:text="${friend.name}"></span></td>
+        <td><span th:text="${friend.email}"></span></td>
         <td>
             <form th:action="@{/removeFriendship}" th:object="${friend}" method="post">
-                <input type="submit" value="Unfriend" class="btn btn-danger">
+                <input type="submit" value="Remove friend" class="btn btn-danger">
                 <input type="hidden" th:field="*{id}">
             </form>
         </td>

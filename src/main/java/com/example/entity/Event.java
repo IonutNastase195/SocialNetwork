@@ -24,6 +24,7 @@ public class Event {
     private String name;
     private String location;
     private LocalDateTime date;
+
     @ManyToMany(mappedBy = "events")
     private List<User> attendees;
 }

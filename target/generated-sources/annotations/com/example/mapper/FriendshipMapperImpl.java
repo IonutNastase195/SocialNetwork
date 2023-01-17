@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-15T20:49:22+0200",
+    date = "2023-01-17T20:26:22+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -25,8 +25,6 @@ public class FriendshipMapperImpl implements FriendshipMapper {
         }
 
         Friendship.FriendshipBuilder friendship = Friendship.builder();
-
-        friendship.status( friendshipRequest.getStatus() );
 
         return friendship.build();
     }
@@ -42,7 +40,6 @@ public class FriendshipMapperImpl implements FriendshipMapper {
         friendshipResponse.setId( friendship.getId() );
         friendshipResponse.setUser1( userToUserResponse( friendship.getUser1() ) );
         friendshipResponse.setUser2( userToUserResponse( friendship.getUser2() ) );
-        friendshipResponse.setStatus( friendship.getStatus() );
 
         return friendshipResponse;
     }

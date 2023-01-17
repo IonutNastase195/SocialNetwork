@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-15T20:49:22+0200",
+    date = "2023-01-17T20:26:22+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -30,13 +30,14 @@ public class EventMapperImpl implements EventMapper {
     }
 
     @Override
-    public Event toEntity(EventRequest eventRequest) {
+    public Event map(EventRequest eventRequest) {
         if ( eventRequest == null ) {
             return null;
         }
 
         Event.EventBuilder event = Event.builder();
 
+        event.id( eventRequest.getId() );
         event.name( eventRequest.getName() );
         event.location( eventRequest.getLocation() );
         event.date( eventRequest.getDate() );

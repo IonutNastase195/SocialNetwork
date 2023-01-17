@@ -1,0 +1,15 @@
+INSERT INTO events (name, location, date) VALUES ('Art Show', 'Museum of Modern Art', '2022-09-20 10:00:00');
+INSERT INTO events (name, location, date) VALUES ('Science Fair', 'Convention Center', '2022-10-10 09:00:00');
+INSERT INTO events (name, location, date) VALUES ('Holiday Parade', 'Main Street', '2022-11-25 14:00:00');
+INSERT INTO events (name, location, date) VALUES ('Fitness Expo', 'Sports Complex', '2022-04-15 09:00:00');
+INSERT INTO events (name, location, date) VALUES ('Wine Tasting', 'Vineyard', '2022-05-20 18:00:00');
+INSERT INTO events (name, location, date) VALUES ('Farmers Market', 'Town Square', '2022-06-12 08:00:00');
+INSERT INTO events (name, location, date) VALUES ('Comic Con', 'Convention Center', '2022-07-30 09:00:00');
+INSERT INTO events (name, location, date) VALUES ('Jazz Festival', 'City Park', '2022-08-20 18:00:00');
+INSERT INTO events (name, location, date) VALUES ('Fashion Week', 'Design Center', '2022-09-15 09:00:00');
+INSERT INTO events (name, location, date) VALUES ('Halloween Parade', 'Main Street', '2022-10-31 14:00:00');
+INSERT INTO events (name, location, date) VALUES ('Thanksgiving Day Parade', 'Downtown', '2022-11-24 09:00:00');
+INSERT INTO events (name, location, date) VALUES ('Christmas Tree Lighting', 'City Hall', '2022-12-01 17:00:00');
+INSERT INTO events (name, location, date) VALUES ('Fireworks Show', 'Riverfront Park', '2022-07-04 20:00:00');
+INSERT INTO events (name, location, date) VALUES ('Music Festival', 'Amphitheater', '2022-08-12 18:00:00');
+INSERT INTO events (name, location, date) VALUES ('Film Festival', 'Movie Theater', '2022-09-25 12:00:00');

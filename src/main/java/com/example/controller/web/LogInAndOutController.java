@@ -43,10 +43,4 @@ public class LogInAndOutController {
             return "error";
         }
     }
-
-    @PostMapping("/logout")
-    public String logoutPage() {
-        userDetailsSession.clear();
-        return "loginPage";
-    }
 }

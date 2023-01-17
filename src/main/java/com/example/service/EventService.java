@@ -40,7 +40,7 @@ public class EventService {
     }
 
     public EventResponse createEvent(EventRequest eventRequest) {
-        Event event = eventMapper.toEntity(eventRequest);
+        Event event = eventMapper.map(eventRequest);
         event.setAttendees(getUsersByIds(eventRequest.getAttendees()));
         Event eventSaved = eventRepository.save(event);
         return eventMapper.toResponse(eventSaved);
@@ -74,6 +74,19 @@ public class EventService {
         User currentUser = userDetailsSession.getUser();
         return eventRepository.findByAttendeesContaining(currentUser);
     }
+
+    public void update(EventRequest eventRequest) {
+        Event eventToUpdate = eventRepository.findById(eventRequest.getId()).orElseThrow(
+                () -> new BusinessException(
+                        String.format("The event with id: %s not exist", eventRequest.getId())
+                ));
+        eventToUpdate.setId(eventRequest.getId());
+        eventToUpdate.setName(eventRequest.getName());
+        eventToUpdate.setLocation(eventRequest.getLocation());
+        eventToUpdate.setAttendees(userRepository.findAllById(eventRequest.getAttendees()));
+
+    }
 }
+
 
 

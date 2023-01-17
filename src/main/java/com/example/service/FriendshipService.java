@@ -55,7 +55,7 @@ public class FriendshipService {
         Friendship friendshipToUpdate = friendshipRepository.findById(id).orElseThrow(
                 () -> new BusinessException("The friendship with the inserted id does not exist!")
         );
-        friendshipToUpdate.setStatus(friendshipUpdate.getStatus());
+
         return friendshipToUpdate;
     }
 
@@ -86,5 +86,22 @@ public class FriendshipService {
     }
 
     public void removeFriendship(User user, UserRequest friend) {
+    }
+    public void save(Friendship friendship) {
+    }
+
+    public List<Friendship> findByUser1OrUser2(User currentUser, User currentUser1) {
+        return friendshipRepository.findByUser1OrUser2(currentUser, currentUser1);
+    }
+
+    public void addFriend(User user, Integer newFriendId){
+        Optional<User> newFriend = userRepository.findById(newFriendId);
+        if(newFriend.isPresent()){
+            Friendship friendship = Friendship.builder()
+                    .user1(user)
+                    .user2(newFriend.get())
+                    .build();
+            friendshipRepository.save(friendship);
+        }
     }
 }

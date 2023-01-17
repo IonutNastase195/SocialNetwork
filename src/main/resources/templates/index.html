@@ -31,6 +31,9 @@
                 <a class="nav-link" href="/friends">Friends</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/allUsersPage">Global Users</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/groupsPage">Groups</a>
             </li>
             <li class="nav-item">
@@ -39,7 +42,7 @@
         </ul>
     </div>
     <form class="form-inline my-2 my-lg-0" th:action="@{/logoutPage}" method="post">
-        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+        <a th:href="@{/loginPage}" class="btn btn-primary btn-block">Logout</a>
     </form>
 </nav>
 <div class="container">
@@ -53,8 +56,6 @@
             </div>
         </div>
     </div>
-
-</div>
 </div>
 <div class="container">
     <div class="row">
@@ -63,7 +64,7 @@
                 <div class="card-body">
                     <form th:action="@{/createPost}" method="post">
                         <div class="form-group">
-                            <label for="postContent">What's on your mind?</label>
+                            <label for="postContent">Share your wisdom!</label>
                             <textarea class="form-control" id="postContent" name="postContent" rows="3"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Post</button>
@@ -73,25 +74,30 @@
         </div>
     </div>
 </div>
-<div class="container mt-3">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card-columns">
-                <div class="card" th:each="post : ${allPosts}">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${post.user.name}"></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"
-                            th:text="${#dates.format(post.createdAt, 'dd/MM/yyyy HH:mm')}"></h6>
-                        <p class="card-text" th:text="${post.text}"></p>
-                        <form th:action="@{/likePost}" th:object="${post}" method="post">
-                            <input type="submit" value="Like" class="btn btn-primary">
-                            <input type="hidden" th:field="*{id}">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="container mt-5">-->
+<!--    <div class="row">-->
+<!--        <div class="col-12">-->
+<!--            <div class="card">-->
+<!--                <div class="card-body">-->
+<!--                    <h2 class="card-title text-center font-weight-bold">Recent Posts</h2>-->
+<!--                    <div th:if="${posts.size() > 0}">-->
+<!--                        <div th:each="post : ${posts}">-->
+<!--                            <div class="card mt-3">-->
+<!--                                <div class="card-body">-->
+<!--                                    <h5 class="card-title" th:text="${post.user.name}"></h5>-->
+<!--                                    <p class="card-text" th:text="${post.content}"></p>-->
+<!--                                    <p class="card-text text-muted" th:text="${post.date}"></p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div th:if="${posts.size() == 0}">-->
+<!--                        <h4 class="text-center">No recent posts.</h4>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 </body>
 </html>

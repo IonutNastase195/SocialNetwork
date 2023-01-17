@@ -2,6 +2,7 @@ com\example\entity\User.class
 com\example\repository\EventRepository.class
 com\example\model\afterLogIn\UserDetailsSession.class
 com\example\model\event\EventRequest.class
+com\example\model\user\UserList.class
 com\example\service\EventService.class
 com\example\mapper\UserMapperImpl.class
 com\example\model\user\UserRequest.class

@@ -1,10 +1,6 @@
 package com.example.controller.web;
 
-import com.example.entity.User;
 import com.example.model.afterLogIn.UserDetailsSession;
-import com.example.model.user.UserRequest;
-import com.example.model.user.UpdateProfileRequest;
-import com.example.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

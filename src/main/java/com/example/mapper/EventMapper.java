@@ -5,7 +5,6 @@ import com.example.entity.User;
 import com.example.model.event.EventRequest;
 import com.example.model.event.EventResponse;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
 public interface EventMapper {
 
     User map(Integer value);
-    Event toEntity(EventRequest eventRequest);
+    Event map(EventRequest eventRequest);
     EventResponse toResponse(Event event);
     List<EventResponse> toResponse(List<Event> events);
 
