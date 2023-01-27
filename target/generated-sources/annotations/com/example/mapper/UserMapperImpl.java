@@ -3,14 +3,14 @@ package com.example.mapper;
 import com.example.entity.User;
 import com.example.model.user.UserRequest;
 import com.example.model.user.UserResponse;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-17T20:26:21+0200",
+    date = "2023-01-22T15:52:17+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -49,16 +49,16 @@ public class UserMapperImpl implements UserMapper {
     }
 
     @Override
-    public List<UserResponse> map(List<User> allUsers) {
+    public Set<UserResponse> map(Set<User> allUsers) {
         if ( allUsers == null ) {
             return null;
         }
 
-        List<UserResponse> list = new ArrayList<UserResponse>( allUsers.size() );
+        Set<UserResponse> set = new LinkedHashSet<UserResponse>( Math.max( (int) ( allUsers.size() / .75f ) + 1, 16 ) );
         for ( User user : allUsers ) {
-            list.add( map( user ) );
+            set.add( map( user ) );
         }
 
-        return list;
+        return set;
     }
 }

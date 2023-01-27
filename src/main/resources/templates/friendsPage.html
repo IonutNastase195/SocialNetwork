@@ -50,20 +50,21 @@
     <thead>
     <tr>
         <th scope="col">#</th>
+        <th scope="col">Id</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
         <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="friend : ${friend}">
+    <tr th:each="friend : ${friends}">
         <td><span th:text="${friend.id}"></span></td>
         <td><span th:text="${friend.name}"></span></td>
         <td><span th:text="${friend.email}"></span></td>
         <td>
             <form th:action="@{/removeFriendship}" th:object="${friend}" method="post">
-                <input type="submit" value="Remove friend" class="btn btn-danger">
-                <input type="hidden" th:field="*{id}">
+                <input type="hidden" name="userId" th:value="${friend.id}">
+                <button type="submit" class="btn btn-primary"> Remove Friend!</button>
             </form>
         </td>
     </tr>

@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example.controller.rest;
 
 import com.example.mapper.GroupMapper;
 import com.example.model.group.GroupRequest;

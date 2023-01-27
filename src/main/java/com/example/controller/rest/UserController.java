@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example.controller.rest;
 
 import com.example.entity.User;
 import com.example.model.afterLogIn.UserDetailsSession;

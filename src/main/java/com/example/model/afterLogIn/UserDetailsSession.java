@@ -21,7 +21,6 @@ public class UserDetailsSession {
     private String email;
     private String password;
     private List<Event> events;
-    private List<Friendship> friendships;
     private List<Group> groups;
     private List<Post> posts;
 
@@ -29,7 +28,7 @@ public class UserDetailsSession {
     public void clear() {
         user = null;
         events = null;
-        friendships = null;
+//        friendships = null;
         groups = null;
         posts = null;
     }

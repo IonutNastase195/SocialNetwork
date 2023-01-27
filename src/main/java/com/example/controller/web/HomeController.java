@@ -11,36 +11,33 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
-    private final EventService eventService;
     private final GroupService groupService;
     private final UserDetailsSession userDetailsSession;
     private final PostService postService;
 
 
-    @GetMapping("/createPost")
-    public String goToCreatePost(Model model) {
-        model.addAttribute("post", postService.createPost(userDetailsSession.getId(), new PostRequest()));
-        return "index";
-    }
+//    @GetMapping("/createPost")
+//    public String goToCreatePost(Model model) {
+//        model.addAttribute("post", postService.createPost(userDetailsSession.getId(), new PostRequest()));
+//        return "index";
+//    }
 
-    @PostMapping("/createPost")
-    public String createPost(@ModelAttribute(value = "post") PostRequest postRequest, Model model) {
-        try {
-            postService.createPost(userDetailsSession.getId(),postRequest);
-            return "index";
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "error";
-        }
-    }
+//    @PostMapping("/createPost")
+//    public String createPost(@ModelAttribute(value = "post") PostRequest postRequest, Model model) {
+//        try {
+//            postService.createPost(userDetailsSession.getId(), postRequest);
+//            return "index";
+//        } catch (Exception e) {
+//            model.addAttribute("error", e.getMessage());
+//            return "error";
+//        }
+//    }
 
     @GetMapping("/groupsPage")
     public String goToGroupsPage(Model model) {
         model.addAttribute("groups", groupService.getCurrentUserGroups());
         return "groupsPage";
     }
-
-
 
 }
 

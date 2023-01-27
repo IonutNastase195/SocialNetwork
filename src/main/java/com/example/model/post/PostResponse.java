@@ -10,11 +10,5 @@ import java.time.LocalDateTime;
 public class PostResponse {
     private Integer id;
     private String text;
-    private String media;
-    private Integer likes;
-    private Integer comments;
-    private Integer shares;
-    private LocalDateTime createdAt;
-    private UserResponse user;
 
 }

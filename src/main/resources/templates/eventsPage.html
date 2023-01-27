@@ -63,8 +63,13 @@
           <td th:text="${event.date}"></td>
           <td th:text="${event.getAttendees().size()}"></td>
           <td>
-            <form th:action="@{/events/rsvp}" th:object="${events}" method="post">
-              <button type="submit" class="btn btn-primary">RSVP</button>
+            <form th:action="@{/joinEvent}" th:object="${event}" method="post">
+              <input type="hidden" name="eventId" th:value="${event.id}">
+              <button th:hidden="${event.isJoined()}" type="submit" class="btn btn-primary"> Join </button>
+            </form>
+            <form th:action="@{/leaveEvent}" th:object="${event}" method="post">
+              <input type="hidden" name="eventId" th:value="${event.id}">
+              <button th:hidden="${!event.isJoined()}" type="submit" class="btn btn-secondary"> Leave </button>
             </form>
           </td>
         </tr>

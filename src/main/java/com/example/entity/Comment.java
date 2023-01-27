@@ -18,7 +18,9 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column
     private String text;
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
     @ManyToOne
     @JoinColumn(name = "user_id")

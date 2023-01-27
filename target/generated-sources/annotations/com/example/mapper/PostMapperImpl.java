@@ -1,10 +1,8 @@
 package com.example.mapper;
 
 import com.example.entity.Post;
-import com.example.entity.User;
 import com.example.model.post.PostRequest;
 import com.example.model.post.PostResponse;
-import com.example.model.user.UserResponse;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -12,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-17T20:26:22+0200",
+    date = "2023-01-22T15:49:19+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -28,7 +26,6 @@ public class PostMapperImpl implements PostMapper {
 
         post.text( postRequest.getText() );
         post.likes( postRequest.getLikes() );
-        post.comments( postRequest.getComments() );
 
         return post.build();
     }
@@ -43,12 +40,6 @@ public class PostMapperImpl implements PostMapper {
 
         postResponse.setId( post.getId() );
         postResponse.setText( post.getText() );
-        postResponse.setMedia( post.getMedia() );
-        postResponse.setLikes( post.getLikes() );
-        postResponse.setComments( post.getComments() );
-        postResponse.setShares( post.getShares() );
-        postResponse.setCreatedAt( post.getCreatedAt() );
-        postResponse.setUser( userToUserResponse( post.getUser() ) );
 
         return postResponse;
     }
@@ -65,20 +56,5 @@ public class PostMapperImpl implements PostMapper {
         }
 
         return list;
-    }
-
-    protected UserResponse userToUserResponse(User user) {
-        if ( user == null ) {
-            return null;
-        }
-
-        UserResponse.UserResponseBuilder userResponse = UserResponse.builder();
-
-        userResponse.id( user.getId() );
-        userResponse.name( user.getName() );
-        userResponse.email( user.getEmail() );
-        userResponse.password( user.getPassword() );
-
-        return userResponse.build();
     }
 }

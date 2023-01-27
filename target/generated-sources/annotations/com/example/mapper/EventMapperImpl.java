@@ -6,13 +6,15 @@ import com.example.model.event.EventRequest;
 import com.example.model.event.EventResponse;
 import com.example.model.user.UserResponse;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-17T20:26:22+0200",
+    date = "2023-01-22T17:26:54+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -41,7 +43,7 @@ public class EventMapperImpl implements EventMapper {
         event.name( eventRequest.getName() );
         event.location( eventRequest.getLocation() );
         event.date( eventRequest.getDate() );
-        event.attendees( map( eventRequest.getAttendees() ) );
+        event.attendees( integerListToUserSet( eventRequest.getAttendees() ) );
 
         return event.build();
     }
@@ -52,15 +54,15 @@ public class EventMapperImpl implements EventMapper {
             return null;
         }
 
-        EventResponse eventResponse = new EventResponse();
+        EventResponse.EventResponseBuilder eventResponse = EventResponse.builder();
 
-        eventResponse.setId( event.getId() );
-        eventResponse.setName( event.getName() );
-        eventResponse.setLocation( event.getLocation() );
-        eventResponse.setDate( event.getDate() );
-        eventResponse.setAttendees( userListToUserResponseList( event.getAttendees() ) );
+        eventResponse.id( event.getId() );
+        eventResponse.name( event.getName() );
+        eventResponse.location( event.getLocation() );
+        eventResponse.date( event.getDate() );
+        eventResponse.attendees( userSetToUserResponseSet( event.getAttendees() ) );
 
-        return eventResponse;
+        return eventResponse.build();
     }
 
     @Override
@@ -91,6 +93,19 @@ public class EventMapperImpl implements EventMapper {
         return list;
     }
 
+    protected Set<User> integerListToUserSet(List<Integer> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        Set<User> set = new LinkedHashSet<User>( Math.max( (int) ( list.size() / .75f ) + 1, 16 ) );
+        for ( Integer integer : list ) {
+            set.add( map( integer ) );
+        }
+
+        return set;
+    }
+
     protected UserResponse userToUserResponse(User user) {
         if ( user == null ) {
             return null;
@@ -106,16 +121,16 @@ public class EventMapperImpl implements EventMapper {
         return userResponse.build();
     }
 
-    protected List<UserResponse> userListToUserResponseList(List<User> list) {
-        if ( list == null ) {
+    protected Set<UserResponse> userSetToUserResponseSet(Set<User> set) {
+        if ( set == null ) {
             return null;
         }
 
-        List<UserResponse> list1 = new ArrayList<UserResponse>( list.size() );
-        for ( User user : list ) {
-            list1.add( userToUserResponse( user ) );
+        Set<UserResponse> set1 = new LinkedHashSet<UserResponse>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        for ( User user : set ) {
+            set1.add( userToUserResponse( user ) );
         }
 
-        return list1;
+        return set1;
     }
 }

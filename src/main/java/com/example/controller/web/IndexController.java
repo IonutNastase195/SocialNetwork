@@ -7,12 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-
 @Controller
 @RequiredArgsConstructor
 public class IndexController {
     private final UserDetailsSession userDetailsSession;
-
 
     @GetMapping("/")
     public String goToIndexPage(Model model) {

@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example.controller.rest;
 
 import com.example.entity.Post;
 import com.example.entity.User;
@@ -30,15 +30,15 @@ public class PostController {
         return postService.getPostById(id);
     }
 
-    @PostMapping("/users/{userId}/posts")
-    public PostResponse createPost(@PathVariable Integer userId, @RequestBody PostRequest postRequest) {
-        return postService.createPost(userId, postRequest);
-    }
+//    @PostMapping("/users/{userId}/posts")
+//    public PostResponse createPost(@PathVariable Integer userId, @RequestBody PostRequest postRequest) {
+//        return postService.createPost(userId, postRequest);
+//    }
 
-    @PutMapping("/posts/{id}")
-    public void updatePostById(@PathVariable Integer id, @RequestBody PostUpdateRequest postUpdateRequest) {
-        postService.updatePostById(postUpdateRequest);
-    }
+//    @PutMapping("/posts/{id}")
+//    public void updatePostById(@PathVariable Integer id, @RequestBody PostUpdateRequest postUpdateRequest) {
+//        postService.updatePostById(postUpdateRequest);
+//    }
 
     @DeleteMapping("/posts/{id}")
     public void deletePost(@PathVariable Integer id) {

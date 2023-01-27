@@ -37,28 +37,28 @@ public class PostService {
         return postMapper.map(post);
     }
 
-    public PostResponse createPost(Integer userId, PostRequest postRequest) {
-        User user = userRepository.findById(userId).orElseThrow(
-                () -> new BusinessException("User not found!")
-        );
-        Post post = postMapper.map(postRequest);
-        post.setUser(user);
-        Post postSaved = postRepository.save(post);
-        return postMapper.map(postSaved);
-    }
+//    public PostResponse createPost(Integer userId, PostRequest postRequest) {
+//        User user = userRepository.findById(userId).orElseThrow(
+//                () -> new BusinessException("User not found!")
+//        );
+//        Post post = postMapper.map(postRequest);
+//        post.setUser(user);
+//        Post postSaved = postRepository.save(post);
+//        return postMapper.map(postSaved);
+//    }
 
-    public void updatePostById(PostUpdateRequest postUpdateRequest) {
-        Post postToUpdate = postRepository.findById(postUpdateRequest.getId()).orElseThrow(
-                () -> new BusinessException(
-                        "The post with the inserted id does not exist!"
-                )
-        );
-        postToUpdate.setText(postUpdateRequest.getText());
-        postToUpdate.setMedia(postUpdateRequest.getMedia());
-        postToUpdate.setLikes(postUpdateRequest.getLikes());
-        postToUpdate.setComments(postUpdateRequest.getComments());
-        postToUpdate.setShares(postUpdateRequest.getShares());
-    }
+//    public void updatePostById(PostUpdateRequest postUpdateRequest) {
+//        Post postToUpdate = postRepository.findById(postUpdateRequest.getId()).orElseThrow(
+//                () -> new BusinessException(
+//                        "The post with the inserted id does not exist!"
+//                )
+//        );
+//        postToUpdate.setText(postUpdateRequest.getText());
+//        postToUpdate.setMedia(postUpdateRequest.getMedia());
+//        postToUpdate.setLikes(postUpdateRequest.getLikes());
+//        postToUpdate.setComments(postUpdateRequest.getComments());
+//        postToUpdate.setShares(postUpdateRequest.getShares());
+//    }
 
     public void deletePost(Integer id) {
         Post postToDelete = postRepository.findById(id).orElseThrow(() ->

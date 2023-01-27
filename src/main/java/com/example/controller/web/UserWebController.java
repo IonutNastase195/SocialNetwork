@@ -18,7 +18,6 @@ public class UserWebController {
 
     private final UserService userService;
     private final UserDetailsSession userDetailsSession;
-    private final FriendshipService friendshipService;
 
     @GetMapping("/createUserPage")
     public String goToCreateUserPage(Model model) {
@@ -82,12 +81,5 @@ public class UserWebController {
         return "allUsersPage";
     }
 
-    @PostMapping("/addFriendship")
-    public String addFriend(@ModelAttribute(value = "userId") Integer userId, Model model) {
-        if (userId != null) {
-            User user = userDetailsSession.getUser();
-            friendshipService.addFriend(user, userId);
-        }
-        return "allUsersPage";
-    }
+
 }

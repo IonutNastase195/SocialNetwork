@@ -8,7 +8,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -31,22 +33,18 @@ public class User {
     @Column(nullable = false, length = 64)
     private String password;
 
-    @ManyToMany
-    @JoinTable(name = "attendees",
+    @ManyToMany(mappedBy = "attendees", fetch = FetchType.EAGER)
+    private Set<Event> events = new HashSet<>();
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "friends",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id")
+            inverseJoinColumns = @JoinColumn(name = "friend_id")
     )
-    private List<Event> events;
-
-    //    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user2_id")
-    @OneToMany
-    @JoinTable(name = "friendships")
     private Set<User> friends = new HashSet<>();
 
-    //    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user2_id")
-    @OneToMany
-    @JoinTable(name = "friendships")
-    private Set<User> befriended = new HashSet<>();
+    @ManyToMany(mappedBy = "friends", fetch = FetchType.EAGER)
+    private Set<User> friendOf = new HashSet<>();
 
     @OneToMany
     private List<Group> groups;
@@ -54,4 +52,16 @@ public class User {
     @OneToMany
     private List<Post> posts;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
