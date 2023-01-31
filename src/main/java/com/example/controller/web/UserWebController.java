@@ -2,7 +2,6 @@ package com.example.controller.web;
 
 import com.example.entity.User;
 import com.example.model.afterLogIn.UserDetailsSession;
-import com.example.model.post.PostRequest;
 import com.example.model.user.UserRequest;
 import com.example.model.user.UpdateProfileRequest;
 import com.example.model.user.UserResponse;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserWebController {
 
     private final UserService userService;
+
     private final UserDetailsSession userDetailsSession;
 
     @GetMapping("/createUserPage")
@@ -80,6 +80,8 @@ public class UserWebController {
         model.addAttribute("allUsers", userService.getAllUsers());
         return "allUsersPage";
     }
+
+
 
 
 }

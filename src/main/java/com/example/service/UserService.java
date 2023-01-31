@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -82,6 +81,7 @@ public class UserService {
         }
         UserResponse userResponse = userMapper.map(user);
         userDetailsSession.setUser(user);
+
         return userResponse;
     }
 
@@ -104,26 +104,6 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new BusinessException("The user with the inserted id does not exist!"));
     }
 
-
-    public void deleteUser(Integer id) {
-        User user = userRepository.findById(id).orElseThrow(
-                () -> new BusinessException("User not found!")
-        );
-        userRepository.delete(user);
-        userDetailsSession.clear();
-    }
-
-
-    public void updateUserById(Integer id, UpdateProfileRequest updateProfileRequest) {
-        User userToUpdate = userRepository.findById(id).orElseThrow(
-                () -> new BusinessException("The user with the inserted id does not exist!")
-        );
-        userToUpdate.setName(updateProfileRequest.getName());
-        userToUpdate.setEmail(updateProfileRequest.getEmail());
-        userToUpdate.setPassword(updateProfileRequest.getPassword());
-        userRepository.save(userToUpdate);
-    }
-
     public UserResponse updateProfile(UpdateProfileRequest updateProfileRequest) {
         User user = userDetailsSession.getUser();
         user.setName(updateProfileRequest.getName());
@@ -134,7 +114,6 @@ public class UserService {
 
         return userResponse;
     }
-
 
     public void update(UserRequest userRequest) {
         User userToUpdate = userRepository.findById(userRequest.getId()).orElseThrow(
@@ -162,6 +141,7 @@ public class UserService {
 
         userRepository.save(user);
     }
+
 }
 
 

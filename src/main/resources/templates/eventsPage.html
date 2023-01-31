@@ -61,7 +61,9 @@
           <td th:text="${event.name}"></td>
           <td th:text="${event.location}"></td>
           <td th:text="${event.date}"></td>
-          <td th:text="${event.getAttendees().size()}"></td>
+          <td>
+            <a th:text="${event.getAttendees().size()}" th:href="@{/eventAttendees(eventId = ${event.id})}" />
+          </td>
           <td>
             <form th:action="@{/joinEvent}" th:object="${event}" method="post">
               <input type="hidden" name="eventId" th:value="${event.id}">

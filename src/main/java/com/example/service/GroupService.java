@@ -51,7 +51,6 @@ public class GroupService {
         );
         groupToUpdate.setName(groupUpdate.getName());
         groupToUpdate.setMembers(getUsersByIds(groupUpdate.getMembers()));
-    //-nu stiu daca e ok
         return null;
     }
 

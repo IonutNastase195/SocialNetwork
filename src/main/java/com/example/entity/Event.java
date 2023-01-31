@@ -3,8 +3,6 @@ package com.example.entity;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.*;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 @Entity

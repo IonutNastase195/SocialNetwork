@@ -5,7 +5,6 @@ import com.example.entity.User;
 import com.example.model.event.EventRequest;
 import com.example.model.event.EventResponse;
 import org.mapstruct.Mapper;
-
 import java.util.List;
 
 @Mapper

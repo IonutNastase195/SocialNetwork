@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import lombok.*;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Table(name = "post")
-public class Post {
+public class Post implements Comparable<Post> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -29,4 +30,9 @@ public class Post {
     private User user;
     @OneToMany
     private List<Comment> comments;
+
+    @Override
+    public int compareTo(@NotNull Post o) {
+        return this.createdAt.compareTo(o.getCreatedAt());
+    }
 }

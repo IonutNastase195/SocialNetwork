@@ -1,7 +1,6 @@
 package com.example.controller.web;
 
 import com.example.model.afterLogIn.UserDetailsSession;
-import com.example.model.post.PostRequest;
 import com.example.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

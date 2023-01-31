@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,6 +19,12 @@ public class EventsWebController {
     public String goToEventsPage(Model model) {
         model.addAttribute("allEvents", eventService.getAllEvents());
         return "eventsPage";
+    }
+
+    @GetMapping("/eventAttendees")
+    public String eventAttendees(Model model, @RequestParam(value = "eventId") Integer id) {
+        model.addAttribute("allAttendees", eventService.getAttendeesForEvent(id));
+        return "eventAttendees";
     }
 
     @PostMapping("/joinEvent")

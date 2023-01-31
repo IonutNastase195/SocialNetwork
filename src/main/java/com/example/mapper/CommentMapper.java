@@ -5,8 +5,6 @@ import com.example.model.comment.CommentRequest;
 import com.example.model.comment.CommentResponse;
 import com.example.model.comment.CommentUpdate;
 import org.mapstruct.Mapper;
-
-
 import java.util.List;
 @Mapper
 public interface CommentMapper {

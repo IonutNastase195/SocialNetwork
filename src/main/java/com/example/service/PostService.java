@@ -5,15 +5,16 @@ import com.example.entity.Post;
 import com.example.entity.User;
 import com.example.exception.BusinessException;
 import com.example.mapper.PostMapper;
-import com.example.model.post.PostRequest;
 import com.example.model.post.PostResponse;
-import com.example.model.post.PostUpdateRequest;
 import com.example.repository.PostRepository;
 import com.example.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,11 +24,27 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final UserService userService;
     private final PostMapper postMapper;
-    private final UserRepository userRepository;
 
-    public List<PostResponse> getAllPosts() {
-        return postMapper.map(postRepository.findAll());
+    public List<PostResponse> getAllPosts(Integer userId) {
+        User user = userService.getUserById(userId);
+        List<Post> posts = postRepository.findAllByUserIsIn(user.getFriends());
+        posts.addAll(postRepository.findAllByUserIsIn(user.getFriendOf()));
+        posts.addAll(postRepository.findAllByUser(user));
+        posts.sort(Post::compareTo);
+
+        List<PostResponse> response = new ArrayList<>();
+        for (Post post : posts) {
+            PostResponse postResponse = PostResponse.builder()
+                    .text(post.getText())
+                    .date(post.getCreatedAt())
+                    .user(post.getUser())
+                    .build();
+            response.add(postResponse);
+        }
+
+        return response;
     }
 
     public PostResponse getPostById(Integer id) {
@@ -37,34 +54,24 @@ public class PostService {
         return postMapper.map(post);
     }
 
-//    public PostResponse createPost(Integer userId, PostRequest postRequest) {
-//        User user = userRepository.findById(userId).orElseThrow(
-//                () -> new BusinessException("User not found!")
-//        );
-//        Post post = postMapper.map(postRequest);
-//        post.setUser(user);
-//        Post postSaved = postRepository.save(post);
-//        return postMapper.map(postSaved);
-//    }
-
-//    public void updatePostById(PostUpdateRequest postUpdateRequest) {
-//        Post postToUpdate = postRepository.findById(postUpdateRequest.getId()).orElseThrow(
-//                () -> new BusinessException(
-//                        "The post with the inserted id does not exist!"
-//                )
-//        );
-//        postToUpdate.setText(postUpdateRequest.getText());
-//        postToUpdate.setMedia(postUpdateRequest.getMedia());
-//        postToUpdate.setLikes(postUpdateRequest.getLikes());
-//        postToUpdate.setComments(postUpdateRequest.getComments());
-//        postToUpdate.setShares(postUpdateRequest.getShares());
-//    }
-
     public void deletePost(Integer id) {
         Post postToDelete = postRepository.findById(id).orElseThrow(() ->
                 new BusinessException("The post that you want to delete does not exist!"));
         postRepository.deleteById(postToDelete.getId());
     }
+
+    public void createPost(String post, Integer userId) {
+        User user = userService.getUserById(userId);
+        Post newPost = Post.builder()
+                .text(post)
+                .likes(0)
+                .createdAt(LocalDateTime.now())
+                .user(user)
+                .build();
+        postRepository.save(newPost);
+    }
+
+
 }
 
 

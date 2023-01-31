@@ -1,6 +1,5 @@
 package com.example.model.group;
 
-import jdk.jshell.Snippet;
 import lombok.*;
 
 import java.util.List;
